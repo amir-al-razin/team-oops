@@ -99,11 +99,11 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 1.5: Define the Finance Class
 **Curriculum: Week 3 - Objects & Classes**
 
-- [ ] Create `include/Finance.h`
+- [x] Create `include/Finance.h`
   - Attributes: `totalRevenue`, `totalExpenses`, `vector<Transaction> transactions`
   - Inner struct/class: `Transaction` (type, amount, date, description)
   - Methods: `recordExpense()`, `recordRevenue()`, `calculateProfit()`, `generateReport()`
-- [ ] Create `src/Finance.cpp`
+- [x] Create `src/Finance.cpp`
   - Implement `recordExpense(double amount, string desc)`
   - Implement `recordRevenue(double amount, string desc)`
   - Implement `calculateProfit()` as `totalRevenue - totalExpenses`
