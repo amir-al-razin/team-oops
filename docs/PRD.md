@@ -57,12 +57,12 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 1.2: Define the Customer Base Class
 **Curriculum: Week 6 - Inheritance**
 
-- [ ] Create `include/Customer.h`
+- [x] Create `include/Customer.h`
   - Define abstract base class `Customer`
   - Private attributes: `id`, `name`, `vector<int> orderHistory`
   - Declare pure virtual method: `virtual double calculateDiscount() = 0`
   - Declare methods: `addOrderToHistory()`, `getOrderHistory()`
-- [ ] Create `src/Customer.cpp`
+- [x] Create `src/Customer.cpp`
   - Implement constructor
   - Implement `addOrderToHistory(int orderId)`
   - Implement non-virtual methods
