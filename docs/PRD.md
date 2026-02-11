@@ -70,17 +70,17 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 1.3: Implement Customer Derived Classes
 **Curriculum: Weeks 8-9 - Virtual Functions & Polymorphism**
 
-- [ ] Create `include/RegularCustomer.h`
+- [x] Create `include/RegularCustomer.h`
   - Inherit from `Customer`
   - Override `calculateDiscount()` to return `0.0`
-- [ ] Create `src/RegularCustomer.cpp`
+- [x] Create `src/RegularCustomer.cpp`
   - Implement constructor (call base constructor)
   - Implement `calculateDiscount()` override
-- [ ] Create `include/PremiumCustomer.h`
+- [x] Create `include/PremiumCustomer.h`
   - Inherit from `Customer`
   - Add attribute: `loyaltyPercentage` (default 5-10%)
   - Override `calculateDiscount()` to return loyalty percentage
-- [ ] Create `src/PremiumCustomer.cpp`
+- [x] Create `src/PremiumCustomer.cpp`
   - Implement constructor with loyalty parameter
   - Implement `calculateDiscount()` override
 
