@@ -43,16 +43,16 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 1.1: Define the Product Class
 **Curriculum: Week 3 - Objects & Classes, Encapsulation**
 
-- [ ] Create `include/Product.h`
+- [x] Create `include/Product.h`
   - Define private attributes: `id`, `name`, `price`, `cost`, `quantity`
   - Declare public methods: constructors, getters, setters
   - Declare methods: `updateStock()`, `calculateProfit()`
-- [ ] Create `src/Product.cpp`
+- [x] Create `src/Product.cpp`
   - Implement constructor with validation
   - Implement getter/setter methods
   - Implement `updateStock(int qty)` with bounds checking
   - Implement `calculateProfit()` as `(price - cost) * quantity`
-- [ ] Add `toString()` or display method for debugging
+- [x] Add `toString()` or display method for debugging
 
 ### Task 1.2: Define the Customer Base Class
 **Curriculum: Week 6 - Inheritance**
