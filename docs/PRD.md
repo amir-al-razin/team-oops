@@ -90,7 +90,7 @@ This implementation plan provides a structured, task-based approach to building 
 - [ ] Create `include/Order.h`
   - Attributes: `orderId`, `Customer* customer`, `vector<pair<Product*, int>> items`, `date`, `totalAmount`, `isFinalized`
   - Methods: `addItem()`, `removeItem()`, `calculateTotal()`, `finalize()`
-- [ ] Create `src/Order.cpp`
+- [x] Create `src/Order.cpp`
   - Implement constructor
   - Implement `addItem(Product* product, int qty)` with stock validation
   - Implement `calculateTotal()` with discount application
