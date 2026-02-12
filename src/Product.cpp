@@ -1,4 +1,5 @@
 #include "Product.h"
+#include "Exceptions.h"
 
 #include <sstream>
 #include <stdexcept>
@@ -71,7 +72,7 @@ void Product::setQuantity(int newQuantity) {
 
 void Product::updateStock(int qty) {
     if (quantity + qty < 0) {
-        throw std::invalid_argument("Stock update would make quantity negative.");
+        throw InsufficientStockException("Stock update would make quantity negative.");
     }
     quantity += qty;
 }

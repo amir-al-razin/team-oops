@@ -143,13 +143,13 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 2.3: Implement Exception Handling
 **Curriculum: Exception Handling**
 
-- [ ] Create `include/Exceptions.h`
+- [x] Create `include/Exceptions.h`
   - Define custom exceptions:
     - `class InsufficientStockException : public std::exception`
     - `class InvalidInputException : public std::exception`
     - `class FileOperationException : public std::exception`
   - Override `what()` method for each
-- [ ] Integrate exception throwing in:
+- [x] Integrate exception throwing in:
   - `Product::updateStock()` - throw if stock goes negative
   - `Order::addItem()` - throw if insufficient stock
   - File operations - throw on file open/write failures

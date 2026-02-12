@@ -1,4 +1,5 @@
 #include "Order.h"
+#include "Exceptions.h"
 #include <algorithm>
 #include <stdexcept>
 
@@ -31,10 +32,10 @@ bool Order::getIsFinalized() const {
 
 void Order::addItem(Product* product, int qty) {
     if (qty <= 0) {
-        throw std::invalid_argument("Quantity must be positive.");
+        throw InvalidInputException("Quantity must be positive.");
     }
     if (qty > product->getQuantity()) {
-        throw std::runtime_error("Insufficient stock for product: " + product->getName());
+        throw InsufficientStockException("Insufficient stock for product: " + product->getName());
     }
     // For now, add the item; stock update will happen on finalize
     items.emplace_back(product, qty);
