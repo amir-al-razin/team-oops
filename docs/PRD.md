@@ -128,7 +128,7 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 2.2: Create Generic Repository Template
 **Curriculum: Week 11 - Templates & Generics**
 
-- [ ] Create `include/Repository.h` (header-only template)
+- [x] Create `include/Repository.h` (header-only template)
   - Template class: `template<typename T> class Repository`
   - Private attribute: `vector<T> items`
   - Methods:
@@ -137,8 +137,8 @@ This implementation plan provides a structured, task-based approach to building 
     - `T* getById(int id)`
     - `vector<T> getAll()`
     - `int size()`
-- [ ] Implement all methods inline in the header
-- [ ] Add error handling for invalid IDs
+- [x] Implement all methods inline in the header
+- [x] Add error handling for invalid IDs
 
 ### Task 2.3: Implement Exception Handling
 **Curriculum: Exception Handling**
