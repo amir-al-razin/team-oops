@@ -86,3 +86,23 @@ std::string Product::toString() const {
         << ", cost=" << cost << ", quantity=" << quantity << "}";
     return out.str();
 }
+
+// Comparison operators
+bool Product::operator>(const Product& other) const {
+    return price > other.price;
+}
+
+bool Product::operator<(const Product& other) const {
+    return price < other.price;
+}
+
+bool Product::operator==(const Product& other) const {
+    return id == other.id;
+}
+
+// Output operator
+std::ostream& operator<<(std::ostream& os, const Product& product) {
+    os << "Product{id=" << product.id << ", name=\"" << product.name << "\", price=" << product.price
+       << ", cost=" << product.cost << ", quantity=" << product.quantity << "}";
+    return os;
+}

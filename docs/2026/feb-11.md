@@ -1,0 +1,1 @@
+throw std::invalid_argument() from <stdexcept> for error handling 

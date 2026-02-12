@@ -2,6 +2,7 @@
 #define PRODUCT_H
 
 #include <string>
+#include <iostream>
 
 class Product {
 public:
@@ -23,6 +24,14 @@ public:
     void updateStock(int qty);
     double calculateProfit() const;
     std::string toString() const;
+
+    // Comparison operators
+    bool operator>(const Product& other) const;
+    bool operator<(const Product& other) const;
+    bool operator==(const Product& other) const;
+
+    // Output operator
+    friend std::ostream& operator<<(std::ostream& os, const Product& product);
 
 private:
     int id;

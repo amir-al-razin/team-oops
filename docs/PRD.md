@@ -116,14 +116,14 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 2.1: Implement Operator Overloading for Product
 **Curriculum: Week 5 - Operator Overloading**
 
-- [ ] In `Product.h`, declare comparison operators:
+- [x] In `Product.h`, declare comparison operators:
   - `bool operator>(const Product& other) const`
   - `bool operator<(const Product& other) const`
   - `bool operator==(const Product& other) const`
-- [ ] In `Product.cpp`, implement operators:
+- [x] In `Product.cpp`, implement operators:
   - Compare by price for `>` and `<`
   - Compare by ID for `==`
-- [ ] Add `operator<<` for `ostream` (optional for easy printing)
+- [x] Add `operator<<` for `ostream` (optional for easy printing)
 
 ### Task 2.2: Create Generic Repository Template
 **Curriculum: Week 11 - Templates & Generics**
