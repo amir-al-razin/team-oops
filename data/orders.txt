@@ -1,0 +1,1 @@
+OrderID,CustomerID,Date,TotalAmount,Finalized,Items (product_id:qty;...)

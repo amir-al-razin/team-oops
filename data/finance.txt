@@ -1,0 +1,2 @@
+TotalRevenue,TotalExpenses
+TransactionType,Amount,Date,Description

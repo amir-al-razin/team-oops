@@ -87,7 +87,7 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 1.4: Define the Order Class
 **Curriculum: Week 3 - Objects & Classes**
 
-- [ ] Create `include/Order.h`
+- [x] Create `include/Order.h`
   - Attributes: `orderId`, `Customer* customer`, `vector<pair<Product*, int>> items`, `date`, `totalAmount`, `isFinalized`
   - Methods: `addItem()`, `removeItem()`, `calculateTotal()`, `finalize()`
 - [x] Create `src/Order.cpp`
@@ -161,19 +161,19 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 3.1: Design Data File Format
 **Curriculum: Week 10 - Streams & File I/O**
 
-- [ ] Define CSV-like format for `data/products.txt`:
+- [x] Define CSV-like format for `data/products.txt`:
   ```
   ID,Name,Price,Cost,Quantity
   ```
-- [ ] Define format for `data/customers.txt`:
+- [x] Define format for `data/customers.txt`:
   ```
   ID,Name,Type,LoyaltyPercentage,OrderIDs (comma-separated)
   ```
-- [ ] Define format for `data/orders.txt`:
+- [x] Define format for `data/orders.txt`:
   ```
   OrderID,CustomerID,Date,TotalAmount,Finalized,Items (product_id:qty;...)
   ```
-- [ ] Define format for `data/finance.txt`:
+- [x] Define format for `data/finance.txt`:
   ```
   TotalRevenue,TotalExpenses
   TransactionType,Amount,Date,Description
