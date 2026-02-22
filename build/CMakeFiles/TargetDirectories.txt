@@ -1,3 +1,0 @@
-C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/build/CMakeFiles/BusinessManagementSystem.dir
-C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/build/CMakeFiles/edit_cache.dir
-C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/build/CMakeFiles/rebuild_cache.dir
