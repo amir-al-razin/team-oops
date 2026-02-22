@@ -1,0 +1,44 @@
+[
+{
+  "directory": "C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/build",
+  "command": "D:\\Software\\Perl\\c\\bin\\g++.exe -I\"C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/include\" -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\BusinessManagementSystem.dir\\src\\main.cpp.obj -c \"C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\main.cpp\"",
+  "file": "C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\main.cpp",
+  "output": "CMakeFiles\\BusinessManagementSystem.dir\\src\\main.cpp.obj"
+},
+{
+  "directory": "C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/build",
+  "command": "D:\\Software\\Perl\\c\\bin\\g++.exe -I\"C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/include\" -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\BusinessManagementSystem.dir\\src\\Product.cpp.obj -c \"C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\Product.cpp\"",
+  "file": "C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\Product.cpp",
+  "output": "CMakeFiles\\BusinessManagementSystem.dir\\src\\Product.cpp.obj"
+},
+{
+  "directory": "C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/build",
+  "command": "D:\\Software\\Perl\\c\\bin\\g++.exe -I\"C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/include\" -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\BusinessManagementSystem.dir\\src\\Customer.cpp.obj -c \"C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\Customer.cpp\"",
+  "file": "C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\Customer.cpp",
+  "output": "CMakeFiles\\BusinessManagementSystem.dir\\src\\Customer.cpp.obj"
+},
+{
+  "directory": "C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/build",
+  "command": "D:\\Software\\Perl\\c\\bin\\g++.exe -I\"C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/include\" -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\BusinessManagementSystem.dir\\src\\RegularCustomer.cpp.obj -c \"C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\RegularCustomer.cpp\"",
+  "file": "C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\RegularCustomer.cpp",
+  "output": "CMakeFiles\\BusinessManagementSystem.dir\\src\\RegularCustomer.cpp.obj"
+},
+{
+  "directory": "C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/build",
+  "command": "D:\\Software\\Perl\\c\\bin\\g++.exe -I\"C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/include\" -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\BusinessManagementSystem.dir\\src\\PremiumCustomer.cpp.obj -c \"C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\PremiumCustomer.cpp\"",
+  "file": "C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\PremiumCustomer.cpp",
+  "output": "CMakeFiles\\BusinessManagementSystem.dir\\src\\PremiumCustomer.cpp.obj"
+},
+{
+  "directory": "C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/build",
+  "command": "D:\\Software\\Perl\\c\\bin\\g++.exe -I\"C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/include\" -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\BusinessManagementSystem.dir\\src\\Order.cpp.obj -c \"C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\Order.cpp\"",
+  "file": "C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\Order.cpp",
+  "output": "CMakeFiles\\BusinessManagementSystem.dir\\src\\Order.cpp.obj"
+},
+{
+  "directory": "C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/build",
+  "command": "D:\\Software\\Perl\\c\\bin\\g++.exe -I\"C:/Users/Saa'd/Desktop/oop project/ma/team-oops-main/team-oops-main/include\" -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\BusinessManagementSystem.dir\\src\\Finance.cpp.obj -c \"C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\Finance.cpp\"",
+  "file": "C:\\Users\\Saa'd\\Desktop\\oop project\\ma\\team-oops-main\\team-oops-main\\src\\Finance.cpp",
+  "output": "CMakeFiles\\BusinessManagementSystem.dir\\src\\Finance.cpp.obj"
+}
+]
