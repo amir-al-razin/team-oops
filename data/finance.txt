@@ -1,6 +1,10 @@
 TotalRevenue,TotalExpenses
-0,1600
+0,25600
 TransactionType,Amount,Date,Description
+Expense,12800,N/A,Loaded total expenses
+Expense,6400,N/A,Loaded total expenses
+Expense,3200,N/A,Loaded total expenses
+Expense,1600,N/A,Loaded total expenses
 Expense,800,N/A,Loaded total expenses
 Expense,400,N/A,Loaded total expenses
 Expense,200,N/A,Loaded total expenses
