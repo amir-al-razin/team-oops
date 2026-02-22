@@ -1,29 +1,41 @@
 #include <iostream>
-#include "DataManager.h"
+#include "Product.h"
+#include "RegularCustomer.h"
+#include "PremiumCustomer.h"
+#include "Order.h"
+#include "Finance.h"
 
 int main() {
     try {
-        DataManager dm;
+        // Create product
+        Product laptop(1, "Laptop", 1000, 800, 10);
 
-        // 1) Load everything
-        dm.loadAll("data");
-        std::cout << "Loaded:\n";
-        std::cout << "  Products: " << dm.products().size() << "\n";
-        std::cout << "  Customers: " << dm.customers().size() << "\n";
-        std::cout << "  Orders: " << dm.orders().size() << "\n";
-        std::cout << "  Profit: " << dm.finance().calculateProfit() << "\n";
+        // Create customer
+        PremiumCustomer customer(101, "Alice", 0.10); // 10% discount
 
-        // 2) Modify something
-        dm.products().push_back(Product(999, "TestItem", 50, 30, 10));
-        dm.finance().recordExpense(100, "Test expense", "2026-02-23");
+        // Create finance
+        Finance finance;
 
-        // 3) Save everything
-        dm.saveAll("data");
-        std::cout << "Saved all to data/*.txt\n";
+        // Create order
+        Order order(1, &customer, "2026-02-23");
 
-        return 0;
+        // Add item
+        order.addItem(&laptop, 2);
+
+        // Before finalize
+        std::cout << "Stock before: " << laptop.getQuantity() << "\n";
+
+        // Finalize
+        order.finalize(finance);
+
+        // After finalize
+        std::cout << "Stock after: " << laptop.getQuantity() << "\n";
+        std::cout << "Order total: " << order.getTotalAmount() << "\n";
+        std::cout << "Finance revenue: " << finance.getTotalRevenue() << "\n";
+
     } catch (const std::exception& e) {
-        std::cerr << "Exception: " << e.what() << "\n";
-        return 1;
+        std::cout << "Error: " << e.what() << "\n";
     }
+
+    return 0;
 }

@@ -20,6 +20,7 @@ public:
     void addOrderToHistory(int orderId);
 
     virtual double calculateDiscount() const = 0;
+    void upgradeToPremium(Customer*& customer, double loyaltyPercent);
 };
 
 #endif

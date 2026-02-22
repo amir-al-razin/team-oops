@@ -2,6 +2,7 @@
 #include "Exceptions.h"
 #include "RegularCustomer.h"
 #include "PremiumCustomer.h"
+#include "Finance.h"
 
 #include <fstream>
 #include <sstream>
@@ -250,11 +251,11 @@ std::vector<Order> FileManager::loadOrders(const std::string& filepath,
 
         o.calculateTotal();
 
-        // If it was finalized when saved, finalize it again (only toggles bool in your current code)
-        // Your finalize() currently doesn't update stock; that's fine for loading.
-        if (finalizedStr == "true" || finalizedStr == "1" || finalizedStr == "Yes") {
-            o.finalize();
-        }
+        bool finalized =
+        (finalizedStr == "true" || finalizedStr == "1" ||
+        finalizedStr == "Yes"  || finalizedStr == "yes");
+
+        o.setFinalized(finalized);
 
         orders.push_back(o);
     }

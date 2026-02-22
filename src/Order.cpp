@@ -1,10 +1,17 @@
 #include "Order.h"
 #include "Exceptions.h"
+#include "Finance.h"
+
 #include <algorithm>
-#include <stdexcept>
+#include <string>
+#include <utility>
 
 Order::Order(int orderId, Customer* customer, const std::string& date)
-    : orderId(orderId), customer(customer), date(date), totalAmount(0.0), isFinalized(false) {}
+    : orderId(orderId),
+      customer(customer),
+      date(date),
+      totalAmount(0.0),
+      isFinalized(false) {}
 
 int Order::getOrderId() const {
     return orderId;
@@ -31,40 +38,103 @@ bool Order::getIsFinalized() const {
 }
 
 void Order::addItem(Product* product, int qty) {
+    if (!product) {
+        throw InvalidInputException("Product is null.");
+    }
     if (qty <= 0) {
         throw InvalidInputException("Quantity must be positive.");
     }
     if (qty > product->getQuantity()) {
         throw InsufficientStockException("Insufficient stock for product: " + product->getName());
     }
-    // For now, add the item; stock update will happen on finalize
+    if (isFinalized) {
+        throw InvalidInputException("Cannot modify a finalized order.");
+    }
+
+    // Optional improvement: if same product already exists in cart, merge qty
+    for (auto& it : items) {
+        if (it.first == product) {
+            int newQty = it.second + qty;
+            if (newQty > product->getQuantity()) {
+                throw InsufficientStockException("Insufficient stock to increase quantity for product: " + product->getName());
+            }
+            it.second = newQty;
+            return;
+        }
+    }
+
     items.emplace_back(product, qty);
 }
 
 void Order::removeItem(Product* product) {
+    if (isFinalized) {
+        throw InvalidInputException("Cannot modify a finalized order.");
+    }
+
     auto it = std::find_if(items.begin(), items.end(),
         [product](const std::pair<Product*, int>& p) { return p.first == product; });
+
     if (it != items.end()) {
         items.erase(it);
     }
 }
 
+
 double Order::calculateTotal() {
     totalAmount = 0.0;
+
     for (const auto& item : items) {
         totalAmount += item.first->getPrice() * item.second;
     }
-    if (customer) {
-        totalAmount *= (1.0 - customer->calculateDiscount());
-    }
+
     return totalAmount;
 }
 
-void Order::finalize() {
+
+void Order::finalize(Finance& finance) {
     if (isFinalized) {
-        throw std::runtime_error("Order is already finalized.");
+        throw InvalidInputException("Order already finalized.");
     }
+    if (!customer) {
+        throw InvalidInputException("Order has no customer.");
+    }
+    if (items.empty()) {
+        throw InvalidInputException("Cannot finalize an empty order.");
+    }
+
+    // Step 1: Calculate subtotal
     calculateTotal();
+
+    // Step 2: Apply discount
+    double discount = customer->calculateDiscount();
+    if (discount < 0.0 || discount >= 1.0) {
+        throw InvalidInputException("Invalid discount value.");
+    }
+    totalAmount = totalAmount * (1.0 - discount);
+
+    // Step 3: Update stock (reduce inventory)
+    for (auto& item : items) {
+        Product* product = item.first;
+        int qty = item.second;
+
+        // updateStock should throw if it goes negative
+        product->updateStock(-qty);
+    }
+
+    // Step 4: Record revenue
+    finance.recordRevenue(
+        totalAmount,
+        "Order #" + std::to_string(orderId),
+        date
+    );
+
+    // Step 5: Customer order history
+    customer->addOrderToHistory(orderId);
+
+    // Step 6: Lock the order
     isFinalized = true;
-    // TODO: Update stock, record revenue, add to customer history (in later phases)
+}
+
+void Order::setFinalized(bool v) {
+    isFinalized = v;
 }
