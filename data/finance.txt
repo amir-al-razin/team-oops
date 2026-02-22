@@ -1,4 +1,8 @@
 TotalRevenue,TotalExpenses
-0,100
+0,1600
 TransactionType,Amount,Date,Description
+Expense,800,N/A,Loaded total expenses
+Expense,400,N/A,Loaded total expenses
+Expense,200,N/A,Loaded total expenses
+Expense,100,N/A,Loaded total expenses
 Expense,100,2026-02-23,Test expense

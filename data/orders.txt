@@ -1,2 +1,2 @@
 OrderID,CustomerID,Date,TotalAmount,Finalized,Items
-1,101,2026-02-23,1250,false,2:1;2:2
+1,101,2026-02-23,75,false,2:3

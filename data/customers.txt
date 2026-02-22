@@ -1,3 +1,4 @@
 ID,Name,Type,LoyaltyPercentage,OrderIDs
 101,Alice,Regular,0,
 102,Bob,Premium,10,
+218,Razin,Regular,0,

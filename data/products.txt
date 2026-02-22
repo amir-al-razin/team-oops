@@ -2,3 +2,4 @@ ID,Name,Price,Cost,Quantity
 1,Laptop,1200,900,5
 2,Mouse,25,10,20
 999,TestItem,50,30,10
+10,Razin er phn,1000,2000,1
