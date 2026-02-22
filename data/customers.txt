@@ -1,1 +1,3 @@
-ID,Name,Type,LoyaltyPercentage,OrderIDs (comma-separated)
+ID,Name,Type,LoyaltyPercentage,OrderIDs
+101,Alice,Regular,0,
+102,Bob,Premium,10,
