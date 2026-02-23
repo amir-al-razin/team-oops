@@ -296,42 +296,56 @@ void FileManager::saveOrders(const std::vector<Order>& orders, const std::string
 
 Finance FileManager::loadFinance(const std::string& filepath) {
     std::ifstream in(filepath);
-    if (!in.is_open()) throw FileOperationException("Failed to open finance file: " + filepath);
+    if (!in.is_open()) {
+        throw FileOperationException("Failed to open finance file: " + filepath);
+    }
 
     Finance f;
     std::string line;
 
-    // 1) Read header line: "TotalRevenue,TotalExpenses"
-    if (!std::getline(in, line)) return f;    
+    // 1) Header: "TotalRevenue,TotalExpenses"
+    if (!std::getline(in, line)) return f;
 
-    // 2) Read transaction header line: "TransactionType,Amount,Date,Description"
-    std::getline(in, line);
+    // 2) Totals line: "300,204800" (ignore it; we'll rebuild totals from transactions)
+    if (!std::getline(in, line)) return f;
 
-    // 3) Load actual transactions and build totals from them
-    // If your Finance::recordRevenue/Expense always adds a transaction, that's OK here,
-    // because these are REAL transactions from the file.
+    // 3) Transaction header: "TransactionType,Amount,Date,Description"
+    if (!std::getline(in, line)) return f;
+
+    // 4) Transactions
     while (std::getline(in, line)) {
         line = trim(line);
         if (line.empty()) continue;
 
         auto cols = split(line, ',');
-        if (cols.size() < 4) throw FileOperationException("Invalid finance transaction line: " + line);
+        if (cols.size() < 4) {
+            throw FileOperationException("Invalid finance transaction line: " + line);
+        }
 
         std::string type = trim(cols[0]);
-        double amount = std::stod(trim(cols[1]));
+        std::string amountStr = trim(cols[1]);
         std::string date = trim(cols[2]);
         std::string desc = trim(cols[3]);
 
-        // IMPORTANT: skip old "Loaded ..." junk lines (cleanup safety)
+        // Cleanup: skip old junk lines if they exist
         if (desc.find("Loaded total") != std::string::npos) continue;
 
-        if (type == "Revenue") f.recordRevenue(amount, desc, date);
-        else if (type == "Expense") f.recordExpense(amount, desc, date);
-        else throw FileOperationException("Unknown transaction type: " + type);
+        double amount;
+        try {
+            amount = std::stod(amountStr);
+        } catch (...) {
+            throw FileOperationException("Invalid amount '" + amountStr + "' in line: " + line);
+        }
+
+        if (type == "Revenue") {
+            f.recordRevenue(amount, desc, date);
+        } else if (type == "Expense") {
+            f.recordExpense(amount, desc, date);
+        } else {
+            throw FileOperationException("Unknown transaction type: " + type);
+        }
     }
 
-    // Optional: You can ignore savedRevenue/savedExpenses entirely now,
-    // because totals are reconstructed from transactions.
     return f;
 }
 void FileManager::saveFinance(const Finance& finance, const std::string& filepath) {

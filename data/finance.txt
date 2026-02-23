@@ -1,3 +1,5 @@
 TotalRevenue,TotalExpenses
-0,0
+75,100
 TransactionType,Amount,Date,Description
+Expense,100,2026-02-23,Test expense
+Revenue,75,2026-02-23,Order #1
