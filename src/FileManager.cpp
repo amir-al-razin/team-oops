@@ -301,27 +301,15 @@ Finance FileManager::loadFinance(const std::string& filepath) {
     Finance f;
     std::string line;
 
-    // header
-    if (!std::getline(in, line)) return f;
+    // 1) Read header line: "TotalRevenue,TotalExpenses"
+    if (!std::getline(in, line)) return f;    
 
-    // totals
-    if (!std::getline(in, line)) return f;
-    line = trim(line);
-    if (!line.empty()) {
-        auto cols = split(line, ',');
-        if (cols.size() >= 2) {
-            double rev = std::stod(trim(cols[0]));
-            double exp = std::stod(trim(cols[1]));
-
-            // set by recording transactions so totals match
-            if (rev > 0) f.recordRevenue(rev, "Loaded total revenue", "N/A");
-            if (exp > 0) f.recordExpense(exp, "Loaded total expenses", "N/A");
-        }
-    }
-
-    // optional transaction header
+    // 2) Read transaction header line: "TransactionType,Amount,Date,Description"
     std::getline(in, line);
 
+    // 3) Load actual transactions and build totals from them
+    // If your Finance::recordRevenue/Expense always adds a transaction, that's OK here,
+    // because these are REAL transactions from the file.
     while (std::getline(in, line)) {
         line = trim(line);
         if (line.empty()) continue;
@@ -334,14 +322,18 @@ Finance FileManager::loadFinance(const std::string& filepath) {
         std::string date = trim(cols[2]);
         std::string desc = trim(cols[3]);
 
+        // IMPORTANT: skip old "Loaded ..." junk lines (cleanup safety)
+        if (desc.find("Loaded total") != std::string::npos) continue;
+
         if (type == "Revenue") f.recordRevenue(amount, desc, date);
         else if (type == "Expense") f.recordExpense(amount, desc, date);
         else throw FileOperationException("Unknown transaction type: " + type);
     }
 
+    // Optional: You can ignore savedRevenue/savedExpenses entirely now,
+    // because totals are reconstructed from transactions.
     return f;
 }
-
 void FileManager::saveFinance(const Finance& finance, const std::string& filepath) {
     std::ofstream out(filepath);
     if (!out.is_open()) throw FileOperationException("Failed to write finance file: " + filepath);

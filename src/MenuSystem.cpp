@@ -12,7 +12,6 @@
 #include "RegularCustomer.h"
 #include "PremiumCustomer.h"
 #include "Order.h"
-
 MenuSystem::MenuSystem(DataManager& dm) : dm(dm) {}
 
 void MenuSystem::clearInput() {
@@ -227,6 +226,7 @@ void MenuSystem::addPremiumCustomer() {
 void MenuSystem::listCustomers() {
     using std::cout;
     using std::left;
+    using std::right;
     using std::setw;
 
     cout << "\n";
@@ -234,24 +234,35 @@ void MenuSystem::listCustomers() {
          << setw(6)  << "ID"
          << setw(20) << "Name"
          << setw(12) << "Type"
-         << setw(15) << "Orders"
+         << right
+         << setw(10) << "Orders"
+         << setw(15) << "TotalSpent"
          << "\n";
 
-    cout << "--------------------------------------------------------\n";
+    cout << "---------------------------------------------------------------\n";
+    cout << std::fixed << std::setprecision(2);
 
     for (auto* c : dm.customers()) {
         if (!c) continue;
 
-        std::string type = "Regular";
-        if (dynamic_cast<PremiumCustomer*>(c))
-            type = "Premium";
+        std::string type = dynamic_cast<PremiumCustomer*>(c) ? "Premium" : "Regular";
+
+        double spent = 0.0;
+        for (const auto& o : dm.orders()) {
+            if (!o.getIsFinalized()) continue;
+            if (!o.getCustomer()) continue;
+            if (o.getCustomer()->getId() == c->getId()) {
+                spent += o.getTotalAmount();
+            }
+        }
 
         cout << left
              << setw(6)  << c->getId()
              << setw(20) << c->getName()
              << setw(12) << type
-             << setw(15) << c->getOrderHistory().size()
-             << setw(15) << "TotalSpent"
+             << right
+             << setw(10) << c->getOrderHistory().size()
+             << setw(15) << spent
              << "\n";
     }
 }
@@ -317,7 +328,33 @@ void MenuSystem::createOrder() {
             break;
         }
     }
-    if (!customerPtr) throw InvalidInputException("Customer not found.");
+
+    if (!customerPtr) {
+        std::cout << "Customer not found. Create new customer now? (y/n): ";
+        char ch;
+        std::cin >> ch;
+        clearInput();
+
+        if (ch == 'y' || ch == 'Y') {
+            std::string name = readLine("Customer Name: ");
+            std::cout << "Type (1=Regular, 2=Premium): ";
+            int type;
+            std::cin >> type;
+            clearInput();
+
+            if (type == 2) {
+                double loyalty = readDouble("Loyalty (fraction like 0.10 for 10%): ");
+                customerPtr = new PremiumCustomer(customerId, name, loyalty);
+            } else {
+                customerPtr = new RegularCustomer(customerId, name);
+            }
+
+            dm.customers().push_back(customerPtr);
+            std::cout << "Customer created.\n";
+        } else {
+            throw InvalidInputException("Order cancelled (customer not found).");
+        }
+    }
 
     dm.orders().emplace_back(orderId, customerPtr, date);
     std::cout << "Order created.\n";
@@ -336,7 +373,6 @@ void MenuSystem::listOrders() {
          << setw(15) << "Date"
          << right
          << setw(12) << "Total"
-         << left
          << setw(12) << "Finalized"
          << "\n";
 
@@ -388,6 +424,10 @@ void MenuSystem::finalizeOrder() {
         if (o.getOrderId() == orderId) {
             o.finalize(dm.finance());
             std::cout << "Order finalized.\n";
+
+            // Print invoice
+            o.printInvoice();
+
             return;
         }
     }

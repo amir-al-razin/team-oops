@@ -2,6 +2,8 @@
 #include "Exceptions.h"
 #include "Finance.h"
 
+#include <iostream>
+#include <iomanip>
 #include <algorithm>
 #include <string>
 #include <utility>
@@ -137,4 +139,75 @@ void Order::finalize(Finance& finance) {
 
 void Order::setFinalized(bool v) {
     isFinalized = v;
+}
+
+void Order::printInvoice() const {
+    using std::cout;
+    using std::left;
+    using std::right;
+    using std::setw;
+
+    cout << "\n============================================================\n";
+    cout << "                     INVOICE / RECEIPT\n";
+    cout << "============================================================\n";
+
+    cout << "Order ID   : " << orderId << "\n";
+    cout << "Date       : " << date << "\n";
+    cout << "Customer   : " << (customer ? customer->getName() : "N/A") << "\n";
+    cout << "CustomerID : " << (customer ? std::to_string(customer->getId()) : "N/A") << "\n";
+    cout << "Status     : " << (isFinalized ? "FINALIZED" : "PENDING") << "\n";
+
+    cout << "------------------------------------------------------------\n";
+    cout << left
+         << setw(6)  << "Qty"
+         << setw(22) << "Item"
+         << right
+         << setw(12) << "Unit"
+         << setw(12) << "Line"
+         << "\n";
+    cout << "------------------------------------------------------------\n";
+
+    cout << std::fixed << std::setprecision(2);
+
+    double subtotal = 0.0;
+    for (const auto& it : items) {
+        Product* p = it.first;
+        int qty = it.second;
+        if (!p) continue;
+
+        double unit = p->getPrice();
+        double line = unit * qty;
+        subtotal += line;
+
+        cout << left
+             << setw(6)  << qty
+             << setw(22) << p->getName().substr(0, 21)   // prevent overflow
+             << right
+             << setw(12) << unit
+             << setw(12) << line
+             << "\n";
+    }
+
+    cout << "------------------------------------------------------------\n";
+
+    // totalAmount is assumed to be final total AFTER discount (from finalize)
+    double total = totalAmount;
+    double discountAmount = subtotal - total;
+
+    // If order not finalized yet, totalAmount might just be subtotal
+    if (!isFinalized) {
+        total = subtotal;
+        discountAmount = 0.0;
+    }
+
+    cout << left << setw(28) << "Subtotal:"
+         << right << setw(24) << subtotal << "\n";
+
+    cout << left << setw(28) << "Discount:"
+         << right << setw(24) << discountAmount << "\n";
+
+    cout << left << setw(28) << "TOTAL PAYABLE:"
+         << right << setw(24) << total << "\n";
+
+    cout << "============================================================\n\n";
 }

@@ -30,6 +30,7 @@ public:
     double calculateTotal();                  // Calculates subtotal (no discount)
     void finalize(Finance& finance);          // Applies discount + updates stock + records revenue
     void setFinalized(bool v);
+    void printInvoice() const;
 
     // Getters
     int getOrderId() const;
