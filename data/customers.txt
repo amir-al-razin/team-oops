@@ -1,8 +1,1 @@
 ID,Name,Type,LoyaltyPercentage,OrderIDs
-101,Alice,Regular,0,1
-102,Bob,Premium,10,
-218,Razin,Regular,0,
-<<<<<<< HEAD
-=======
-1,aminul,Regular,0,1
->>>>>>> a4ace9930e610303da37f082f3ee5db1ee3cae78

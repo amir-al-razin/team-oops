@@ -1,13 +1,3 @@
 TotalRevenue,TotalExpenses
-<<<<<<< HEAD
-75,100
+0,0
 TransactionType,Amount,Date,Description
-Expense,100,2026-02-23,Test expense
-Revenue,75,2026-02-23,Order #1
-=======
-125,100
-TransactionType,Amount,Date,Description
-Expense,100,2026-02-23,Test expense
-Revenue,75,2026-02-23,Order #1
-Revenue,50,2024-2-21,Order #1
->>>>>>> a4ace9930e610303da37f082f3ee5db1ee3cae78

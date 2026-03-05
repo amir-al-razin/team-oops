@@ -115,7 +115,6 @@ std::vector<Customer*> FileManager::loadCustomers(const std::string& filepath) {
         return customers;
     }
 
-<<<<<<< HEAD
     while (std::getline(in, line)) {
         line = trim(line);
         if (line.empty()) continue;
@@ -150,48 +149,6 @@ std::vector<Customer*> FileManager::loadCustomers(const std::string& filepath) {
         }
 
         customers.push_back(c);
-=======
-    try {
-        while (std::getline(in, line)) {
-            line = trim(line);
-            if (line.empty()) continue;
-
-            auto cols = split(line, ',');
-            if (cols.size() < 4) throw FileOperationException("Invalid customers line: " + line);
-
-            int id = std::stoi(trim(cols[0]));
-            std::string name = trim(cols[1]);
-            std::string type = trim(cols[2]);
-            double loyalty = std::stod(trim(cols[3]));
-
-            Customer* c = nullptr;
-            if (type == "Premium") {
-                c = new PremiumCustomer(id, name, loyalty);
-            } else if (type == "Regular") {
-                c = new RegularCustomer(id, name);
-            } else {
-                throw FileOperationException("Unknown customer type: " + type);
-            }
-
-            // order history (optional col 5)
-            if (cols.size() >= 5) {
-                std::string hist = trim(cols[4]);
-                if (!hist.empty()) {
-                    auto ids = split(hist, ';');
-                    for (const auto& sId : ids) {
-                        std::string t = trim(sId);
-                        if (!t.empty()) c->addOrderToHistory(std::stoi(t));
-                    }
-                }
-            }
-
-            customers.push_back(c);
-        }
-    } catch (...) {
-        // Prevent memory leak if parsing fails midway
-        for (auto* c : customers) delete c;
-        throw;
->>>>>>> a4ace9930e610303da37f082f3ee5db1ee3cae78
     }
 
     return customers;
@@ -233,12 +190,7 @@ void FileManager::saveCustomers(const std::vector<Customer*>& customers, const s
 // Format:
 // OrderID,CustomerID,Date,TotalAmount,Finalized,Items
 // Items: product_id:qty;product_id:qty
-<<<<<<< HEAD
-//
-// Important: We reconstruct Order items by linking pointers to loaded products/customers.
 
-=======
->>>>>>> a4ace9930e610303da37f082f3ee5db1ee3cae78
 std::vector<Order> FileManager::loadOrders(const std::string& filepath,
                                           std::vector<Product>& products,
                                           std::vector<Customer*>& customers) {
@@ -267,10 +219,6 @@ std::vector<Order> FileManager::loadOrders(const std::string& filepath,
         int orderId = std::stoi(trim(cols[0]));
         int customerId = std::stoi(trim(cols[1]));
         std::string date = trim(cols[2]);
-<<<<<<< HEAD
-        // cols[3] totalAmount (we can ignore, it can be recalculated)
-=======
->>>>>>> a4ace9930e610303da37f082f3ee5db1ee3cae78
         std::string finalizedStr = trim(cols[4]);
         std::string itemsStr = trim(cols[5]);
 
@@ -291,13 +239,6 @@ std::vector<Order> FileManager::loadOrders(const std::string& filepath,
                 Product* p = findProductById(products, pid);
                 if (!p) throw FileOperationException("Order references missing productId: " + std::to_string(pid));
 
-<<<<<<< HEAD
-                // addItem validates stock; for historical load we still want the structure.
-                // If your saved orders can exceed current stock, you can bypass addItem by temporarily
-                // disabling that check. For now we keep addItem.
-=======
-
->>>>>>> a4ace9930e610303da37f082f3ee5db1ee3cae78
                 o.addItem(p, qty);
             }
         }
@@ -359,11 +300,7 @@ Finance FileManager::loadFinance(const std::string& filepath) {
     // 1) Header: "TotalRevenue,TotalExpenses"
     if (!std::getline(in, line)) return f;
 
-<<<<<<< HEAD
-    // 2) Totals line: "300,204800" (ignore it; we'll rebuild totals from transactions)
-=======
     // 2) Totals line: "300,204800"
->>>>>>> a4ace9930e610303da37f082f3ee5db1ee3cae78
     if (!std::getline(in, line)) return f;
 
     // 3) Transaction header: "TransactionType,Amount,Date,Description"
@@ -382,17 +319,7 @@ Finance FileManager::loadFinance(const std::string& filepath) {
         std::string type = trim(cols[0]);
         std::string amountStr = trim(cols[1]);
         std::string date = trim(cols[2]);
-<<<<<<< HEAD
         std::string desc = trim(cols[3]);
-=======
-        
-        // Handle descriptions that contain commas (reconstruct split parts)
-        std::string desc = cols[3];
-        for (size_t i = 4; i < cols.size(); ++i) {
-            desc += "," + cols[i];
-        }
-        desc = trim(desc);
->>>>>>> a4ace9930e610303da37f082f3ee5db1ee3cae78
 
         // Cleanup: skip old junk lines if they exist
         if (desc.find("Loaded total") != std::string::npos) continue;
