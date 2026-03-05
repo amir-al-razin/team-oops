@@ -1,2 +1,5 @@
 OrderID,CustomerID,Date,TotalAmount,Finalized,Items
+<<<<<<< HEAD
+=======
 1,1,2024-2-21,50,true,999:1
+>>>>>>> a4ace9930e610303da37f082f3ee5db1ee3cae78
