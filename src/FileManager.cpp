@@ -8,32 +8,33 @@
 #include <sstream>
 #include <stdexcept>
 #include <cctype>
+using namespace std;
 
 // ---------------- Helpers ----------------
 
-std::vector<std::string> FileManager::split(const std::string& s, char delim) {
-    std::vector<std::string> out;
-    std::stringstream ss(s);
-    std::string item;
-    while (std::getline(ss, item, delim)) out.push_back(item);
+vector<string> FileManager::split(const string& s, char delim) {
+    vector<string> out;
+    stringstream ss(s);
+    string item;
+    while (getline(ss, item, delim)) out.push_back(item);
     return out;
 }
 
-std::string FileManager::trim(const std::string& s) {
+string FileManager::trim(const string& s) {
     size_t b = 0, e = s.size();
-    while (b < e && std::isspace(static_cast<unsigned char>(s[b]))) b++;
-    while (e > b && std::isspace(static_cast<unsigned char>(s[e - 1]))) e--;
+    while (b < e && isspace(static_cast<unsigned char>(s[b]))) b++;
+    while (e > b && isspace(static_cast<unsigned char>(s[e - 1]))) e--;
     return s.substr(b, e - b);
 }
 
-Product* FileManager::findProductById(std::vector<Product>& products, int id) {
+Product* FileManager::findProductById(vector<Product>& products, int id) {
     for (auto& p : products) {
         if (p.getId() == id) return &p;
     }
     return nullptr;
 }
 
-Customer* FileManager::findCustomerById(std::vector<Customer*>& customers, int id) {
+Customer* FileManager::findCustomerById(vector<Customer*>& customers, int id) {
     for (auto* c : customers) {
         if (c && c->getId() == id) return c;
     }
@@ -42,16 +43,16 @@ Customer* FileManager::findCustomerById(std::vector<Customer*>& customers, int i
 
 // ---------------- Products ----------------
 
-std::vector<Product> FileManager::loadProducts(const std::string& filepath) {
-    std::ifstream in(filepath);
+vector<Product> FileManager::loadProducts(const string& filepath) {
+    ifstream in(filepath);
     if (!in.is_open()) throw FileOperationException("Failed to open products file: " + filepath);
 
-    std::vector<Product> products;
-    std::string line;
+    vector<Product> products;
+    string line;
 
     // optional header
-    if (std::getline(in, line)) {
-        if (line.find("ID") == std::string::npos) {
+    if (getline(in, line)) {
+        if (line.find("ID") == string::npos) {
             // first line is data, process it
             in.seekg(0);
         }
@@ -59,18 +60,18 @@ std::vector<Product> FileManager::loadProducts(const std::string& filepath) {
         return products; // empty file
     }
 
-    while (std::getline(in, line)) {
+    while (getline(in, line)) {
         line = trim(line);
         if (line.empty()) continue;
 
         auto cols = split(line, ',');
         if (cols.size() < 5) throw FileOperationException("Invalid products line: " + line);
 
-        int id = std::stoi(trim(cols[0]));
-        std::string name = trim(cols[1]);
-        double price = std::stod(trim(cols[2]));
-        double cost = std::stod(trim(cols[3]));
-        int qty = std::stoi(trim(cols[4]));
+        int id = stoi(trim(cols[0]));
+        string name = trim(cols[1]);
+        double price = stod(trim(cols[2]));
+        double cost = stod(trim(cols[3]));
+        int qty = stoi(trim(cols[4]));
 
         products.emplace_back(id, name, price, cost, qty);
     }
@@ -78,8 +79,8 @@ std::vector<Product> FileManager::loadProducts(const std::string& filepath) {
     return products;
 }
 
-void FileManager::saveProducts(const std::vector<Product>& products, const std::string& filepath) {
-    std::ofstream out(filepath);
+void FileManager::saveProducts(const vector<Product>& products, const string& filepath) {
+    ofstream out(filepath);
     if (!out.is_open()) throw FileOperationException("Failed to write products file: " + filepath);
 
     out << "ID,Name,Price,Cost,Quantity\n";
@@ -99,16 +100,16 @@ void FileManager::saveProducts(const std::vector<Product>& products, const std::
 // 101,Alice,Regular,0,1;2
 // 102,Bob,Premium,10,3
 
-std::vector<Customer*> FileManager::loadCustomers(const std::string& filepath) {
-    std::ifstream in(filepath);
+vector<Customer*> FileManager::loadCustomers(const string& filepath) {
+    ifstream in(filepath);
     if (!in.is_open()) throw FileOperationException("Failed to open customers file: " + filepath);
 
-    std::vector<Customer*> customers;
-    std::string line;
+    vector<Customer*> customers;
+    string line;
 
     // optional header
-    if (std::getline(in, line)) {
-        if (line.find("Type") == std::string::npos) {
+    if (getline(in, line)) {
+        if (line.find("Type") == string::npos) {
             in.seekg(0);
         }
     } else {
@@ -116,17 +117,17 @@ std::vector<Customer*> FileManager::loadCustomers(const std::string& filepath) {
     }
 
     try {
-        while (std::getline(in, line)) {
+        while (getline(in, line)) {
             line = trim(line);
             if (line.empty()) continue;
 
             auto cols = split(line, ',');
             if (cols.size() < 4) throw FileOperationException("Invalid customers line: " + line);
 
-            int id = std::stoi(trim(cols[0]));
-            std::string name = trim(cols[1]);
-            std::string type = trim(cols[2]);
-            double loyalty = std::stod(trim(cols[3]));
+            int id = stoi(trim(cols[0]));
+            string name = trim(cols[1]);
+            string type = trim(cols[2]);
+            double loyalty = stod(trim(cols[3]));
 
             Customer* c = nullptr;
             if (type == "Premium") {
@@ -139,12 +140,12 @@ std::vector<Customer*> FileManager::loadCustomers(const std::string& filepath) {
 
             // order history (optional col 5)
             if (cols.size() >= 5) {
-                std::string hist = trim(cols[4]);
+                string hist = trim(cols[4]);
                 if (!hist.empty()) {
                     auto ids = split(hist, ';');
                     for (const auto& sId : ids) {
-                        std::string t = trim(sId);
-                        if (!t.empty()) c->addOrderToHistory(std::stoi(t));
+                        string t = trim(sId);
+                        if (!t.empty()) c->addOrderToHistory(stoi(t));
                     }
                 }
             }
@@ -160,8 +161,8 @@ std::vector<Customer*> FileManager::loadCustomers(const std::string& filepath) {
     return customers;
 }
 
-void FileManager::saveCustomers(const std::vector<Customer*>& customers, const std::string& filepath) {
-    std::ofstream out(filepath);
+void FileManager::saveCustomers(const vector<Customer*>& customers, const string& filepath) {
+    ofstream out(filepath);
     if (!out.is_open()) throw FileOperationException("Failed to write customers file: " + filepath);
 
     out << "ID,Name,Type,LoyaltyPercentage,OrderIDs\n";
@@ -169,7 +170,7 @@ void FileManager::saveCustomers(const std::vector<Customer*>& customers, const s
     for (auto* c : customers) {
         if (!c) continue;
 
-        std::string type = "Regular";
+        string type = "Regular";
         double loyalty = 0.0;
 
         // detect premium via dynamic_cast
@@ -196,75 +197,88 @@ void FileManager::saveCustomers(const std::vector<Customer*>& customers, const s
 // Format:
 // OrderID,CustomerID,Date,TotalAmount,Finalized,Items
 // Items: product_id:qty;product_id:qty
-std::vector<Order> FileManager::loadOrders(const std::string& filepath,
-                                          std::vector<Product>& products,
-                                          std::vector<Customer*>& customers) {
+vector<Order>FileManager::loadOrders(const string& filepath,vector<Product> &products,vector<Customer*>& customers){
     std::ifstream in(filepath);
-    if (!in.is_open()) throw FileOperationException("Failed to open orders file: " + filepath);
+    if(!in.is_open()){
+        throw FileOperationException("Failed to open orders file: " + filepath);
+    }
+    vector<Order> orders;
+    string line;
 
-    std::vector<Order> orders;
-    std::string line;
-
-    // optional header
+    // Optional header: clear stream errors before seeking to prevent EOF bugs
     if (std::getline(in, line)) {
         if (line.find("OrderID") == std::string::npos) {
+            in.clear(); 
             in.seekg(0);
         }
     } else {
         return orders;
     }
 
-    while (std::getline(in, line)) {
+    while(getline(in,line)){
         line = trim(line);
-        if (line.empty()) continue;
+        if(line.empty()){
+            continue;
+        }
+        auto cols = split(line,',');
+        if(cols.size() < 6){
+            throw FileOperationException("Invalid orders line: " + line);
+        }
+        int orderId = stoi(trim(cols[0]));
+        int customerId = stoi(trim(cols[1]));
+        string date = trim(cols[2]);
+        double historicalTotal = stod(trim(cols[3]));
+        string finalizedStr = trim(cols[4]);
+        string itemsStr = trim(cols[5]);
 
-        auto cols = split(line, ',');
-        if (cols.size() < 6) throw FileOperationException("Invalid orders line: " + line);
+        Customer* c = nullptr;
+        if(customerId!=-1){
+            c = findCustomerById(customers,customerId);
+            if(!c){
+                throw FileOperationException("Order references missing customerId: " + std::to_string(customerId));
+            }
 
-        int orderId = std::stoi(trim(cols[0]));
-        int customerId = std::stoi(trim(cols[1]));
-        std::string date = trim(cols[2]);
-        std::string finalizedStr = trim(cols[4]);
-        std::string itemsStr = trim(cols[5]);
-
-        Customer* c = findCustomerById(customers, customerId);
-        if (!c) throw FileOperationException("Order references missing customerId: " + std::to_string(customerId));
+        }
 
         Order o(orderId, c, date);
-
-        if (!itemsStr.empty()) {
+        if(!itemsStr.empty()){
             auto itemPairs = split(itemsStr, ';');
-            for (const auto& ip : itemPairs) {
-                auto parts = split(trim(ip), ':');
-                if (parts.size() != 2) throw FileOperationException("Invalid order item: " + ip);
+            for(const auto& ip : itemPairs){
+                string trimmedIp = trim(ip);
+                if(trimmedIp.empty()){
+                    continue;
+                }
+                auto parts = split(trimmedIp, ':');
+                if(parts.size() != 2){
+                    throw FileOperationException("Invalid order item: " + trimmedIp);
+                }
+                int pid = stoi(trim(parts[0]));
+                int qty = stoi(trim(parts[1]));
 
-                int pid = std::stoi(trim(parts[0]));
-                int qty = std::stoi(trim(parts[1]));
-
-                Product* p = findProductById(products, pid);
-                if (!p) throw FileOperationException("Order references missing productId: " + std::to_string(pid));
-
+                Product* p = nullptr;
+                if(pid != -1){
+                    p = findProductById(products, pid);
+                    if(!p){
+                        throw FileOperationException("Order references missing productId: " + std::to_string(pid));
+                    }
+                }
 
                 o.addItem(p, qty);
             }
         }
-
-        o.calculateTotal();
-
-        bool finalized =
-        (finalizedStr == "true" || finalizedStr == "1" ||
-        finalizedStr == "Yes"  || finalizedStr == "yes");
+        o.setTotalAmount(historicalTotal);
+        bool finalized = (finalizedStr == "true" || finalizedStr == "1" ||
+                          finalizedStr == "Yes"  || finalizedStr == "yes");
 
         o.setFinalized(finalized);
 
         orders.push_back(o);
-    }
 
+    }
     return orders;
 }
-
-void FileManager::saveOrders(const std::vector<Order>& orders, const std::string& filepath) {
-    std::ofstream out(filepath);
+void FileManager::saveOrders(const vector<Order>& orders, const string& filepath) {
+    ofstream out(filepath);
     if (!out.is_open()) throw FileOperationException("Failed to write orders file: " + filepath);
 
     out << "OrderID,CustomerID,Date,TotalAmount,Finalized,Items\n";
@@ -294,26 +308,26 @@ void FileManager::saveOrders(const std::vector<Order>& orders, const std::string
 // TransactionType,Amount,Date,Description
 // ...
 
-Finance FileManager::loadFinance(const std::string& filepath) {
-    std::ifstream in(filepath);
+Finance FileManager::loadFinance(const string& filepath) {
+    ifstream in(filepath);
     if (!in.is_open()) {
         throw FileOperationException("Failed to open finance file: " + filepath);
     }
 
     Finance f;
-    std::string line;
+    string line;
 
     // 1) Header: "TotalRevenue,TotalExpenses"
-    if (!std::getline(in, line)) return f;
+    if (!getline(in, line)) return f;
 
     // 2) Totals line: "300,204800"
-    if (!std::getline(in, line)) return f;
+    if (!getline(in, line)) return f;
 
     // 3) Transaction header: "TransactionType,Amount,Date,Description"
-    if (!std::getline(in, line)) return f;
+    if (!getline(in, line)) return f;
 
     // 4) Transactions
-    while (std::getline(in, line)) {
+    while (getline(in, line)) {
         line = trim(line);
         if (line.empty()) continue;
 
@@ -322,23 +336,23 @@ Finance FileManager::loadFinance(const std::string& filepath) {
             throw FileOperationException("Invalid finance transaction line: " + line);
         }
 
-        std::string type = trim(cols[0]);
-        std::string amountStr = trim(cols[1]);
-        std::string date = trim(cols[2]);
+        string type = trim(cols[0]);
+        string amountStr = trim(cols[1]);
+        string date = trim(cols[2]);
         
         // Handle descriptions that contain commas (reconstruct split parts)
-        std::string desc = cols[3];
+        string desc = cols[3];
         for (size_t i = 4; i < cols.size(); ++i) {
             desc += "," + cols[i];
         }
         desc = trim(desc);
 
         // Cleanup: skip old junk lines if they exist
-        if (desc.find("Loaded total") != std::string::npos) continue;
+        if (desc.find("Loaded total") != string::npos) continue;
 
         double amount;
         try {
-            amount = std::stod(amountStr);
+            amount = stod(amountStr);
         } catch (...) {
             throw FileOperationException("Invalid amount '" + amountStr + "' in line: " + line);
         }
@@ -354,8 +368,8 @@ Finance FileManager::loadFinance(const std::string& filepath) {
 
     return f;
 }
-void FileManager::saveFinance(const Finance& finance, const std::string& filepath) {
-    std::ofstream out(filepath);
+void FileManager::saveFinance(const Finance& finance, const string& filepath) {
+    ofstream out(filepath);
     if (!out.is_open()) throw FileOperationException("Failed to write finance file: " + filepath);
 
     out << "TotalRevenue,TotalExpenses\n";

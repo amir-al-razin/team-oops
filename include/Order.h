@@ -39,6 +39,8 @@ public:
     const std::string& getDate() const;
     double getTotalAmount() const;
     bool getIsFinalized() const;
+    // Setters
+    void setTotalAmount(double amount);
 
     // Optional helper
     void display() const;

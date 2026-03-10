@@ -68,6 +68,10 @@ void Order::addItem(Product* product, int qty) {
     items.emplace_back(product, qty);
 }
 
+void Order::setTotalAmount(double amount) {
+    totalAmount = amount;
+}
+
 void Order::removeItem(Product* product) {
     if (isFinalized) {
         throw InvalidInputException("Cannot modify a finalized order.");
