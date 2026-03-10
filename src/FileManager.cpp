@@ -107,10 +107,9 @@ vector<Customer*> FileManager::loadCustomers(const string& filepath) {
     vector<Customer*> customers;
     string line;
 
-    // optional header
     if (getline(in, line)) {
         if (line.find("Type") == string::npos) {
-            in.clear(); // Fix: Clear stream errors before seeking
+            in.clear();
             in.seekg(0);
         }
     } else {
@@ -138,8 +137,6 @@ vector<Customer*> FileManager::loadCustomers(const string& filepath) {
             } else {
                 throw FileOperationException("Unknown customer type: " + type);
             }
-
-            // order history (optional col 5)
             if (cols.size() >= 5) {
                 string hist = trim(cols[4]);
                 if (!hist.empty()) {
@@ -151,11 +148,9 @@ vector<Customer*> FileManager::loadCustomers(const string& filepath) {
                 }
             }
             
-            // Fix: Moved inside the while loop so every customer is added
             customers.push_back(c); 
         }
     } catch (...) {
-        // Fix: Restored the catch block to prevent memory leaks if parsing fails
         for (auto* c : customers) delete c;
         throw;
     }
@@ -263,9 +258,9 @@ vector<Order>FileManager::loadOrders(const string& filepath,vector<Product> &pro
                     if(!p){
                         throw FileOperationException("Order references missing productId: " + std::to_string(pid));
                     }
+                    o.addItem(p, qty);
                 }
 
-                o.addItem(p, qty);
             }
         }
         o.setTotalAmount(historicalTotal);

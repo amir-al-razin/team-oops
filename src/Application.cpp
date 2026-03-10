@@ -30,9 +30,10 @@ void Application::run() {
     std::cout << "                             \033[36mDeveloped by Basement Dwellers Team\033[0m\n";
     std::cout << "                        \033[33mCSE 4301 - Object Oriented Programming Project\033[0m\n\n";
 
-
+    bool safeToSave = false; // The Safety Lock
     try {
         dm.loadAll(dataDir);
+        safeToSave = true;
         std::cout << "Loaded data from: " << dataDir << "\n";
     } catch (const std::exception& e) {
         std::cout << "Warning: Could not load data (" << e.what()
@@ -41,10 +42,15 @@ void Application::run() {
 
     menu.mainLoop();
 
-    try {
-        dm.saveAll(dataDir);
-        std::cout << "Saved data to: " << dataDir << "\n";
-    } catch (const std::exception& e) {
-        std::cout << "Error: Could not save data (" << e.what() << ").\n";
+    if(safeToSave){
+        try {
+            dm.saveAll(dataDir);
+            std::cout << "Saved data to: " << dataDir << "\n";
+        } catch (const std::exception& e) {
+            std::cout << "Error: Could not save data (" << e.what() << ").\n";
+        }
+    }
+    else{
+        std::cout << "Skipped saving to protect your original files from being overwritten.\n";
     }
 }

@@ -1,1 +1,51 @@
 ID,Name,Price,Cost,Quantity
+1,Gaming Laptop,1500.00,1000.00,10
+2,Mechanical Keyboard,120.50,50.00,48
+3,Wireless Mouse,25.00,10.00,0
+4,Server Rack,15000.00,10000.00,2
+5,Monitor Stand,45.00,15.00,100
+6,USB-C Hub,30.00,12.00,55
+7,4K Monitor,400.00,250.00,15
+8,Ethernet Cable 10ft,15.00,3.00,200
+9,Webcam 1080p,60.00,25.00,34
+10,Noise Cancelling Headphones,250.00,100.00,22
+11,Ergonomic Chair,350.00,150.00,8
+12,Standing Desk,500.00,200.00,5
+13,Desk Mat,20.00,5.00,150
+14,RGB Light Strip,25.00,8.00,80
+15,1TB SSD,100.00,60.00,40
+16,2TB HDD,60.00,30.00,60
+17,Graphics Card RTX 4090,1600.00,1200.00,3
+18,Processor i9,500.00,350.00,12
+19,Motherboard Z790,250.00,150.00,10
+20,Power Supply 850W,130.00,70.00,18
+21,Computer Case,100.00,50.00,25
+22,Case Fan 120mm,15.00,5.00,100
+23,Thermal Paste,10.00,2.00,85
+24,UPS Battery Backup,180.00,100.00,7
+25,Surge Protector,25.00,10.00,45
+26,Wireless Router,120.00,60.00,14
+27,Network Switch,80.00,40.00,20
+28,NAS Enclosure,300.00,180.00,4
+29,Microphone Arm,45.00,15.00,30
+30,Condenser Mic,150.00,70.00,12
+31,Capture Card,180.00,90.00,9
+32,Stream Deck,150.00,80.00,11
+33,Green Screen,80.00,30.00,15
+34,Ring Light,50.00,20.00,25
+35,Laptop Sleeve,25.00,8.00,60
+36,Laptop Cooling Pad,35.00,12.00,40
+37,USB Flash Drive 64GB,15.00,5.00,120
+38,External Hard Drive 2TB,80.00,40.00,35
+39,SD Card 128GB,25.00,10.00,80
+40,Cable Management Kit,20.00,5.00,90
+41,DisplayPort Cable,15.00,4.00,75
+42,HDMI Cable,12.00,3.00,100
+43,Screen Cleaner,10.00,2.00,150
+44,Compressed Air Duster,8.00,3.00,200
+45,Anti-Static Wrist Strap,5.00,1.00,50
+46,Screwdriver Set,25.00,10.00,30
+47,Thermal Pads,12.00,4.00,45
+48,Bluetooth Adapter,15.00,5.00,60
+49,Wi-Fi Card,40.00,15.00,25
+50,VR Headset,400.00,250.00,6
