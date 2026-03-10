@@ -819,7 +819,7 @@ void MenuSystem::smartRiskReport() {
          << right
          << setw(10) << "Stock"
          << setw(10) << "Sold"
-         << setw(12) << "RiskScore"
+         << setw(12) << "Risk Score"
          << "\n";
 
     cout << "------------------------------------------------------------\n";
