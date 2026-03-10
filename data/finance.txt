@@ -1,53 +1,53 @@
 TotalRevenue,TotalExpenses
-8264.40,15000.00
+8397.75,15000
 TransactionType,Amount,Date,Description
-Expense,5000.00,2026-01-01,Warehouse Rent, Q1
-Expense,2000.00,2026-01-05,Server Hosting Fees
-Expense,8000.00,2026-01-10,Bulk Inventory Purchase, Tech Gear
-Revenue,1500.00,2026-01-01,Order #1001
-Revenue,145.50,2026-01-05,Order #1002
-Revenue,340.00,2026-01-10,Order #1003
-Revenue,45.00,2026-01-12,Order #1004
-Revenue,30.00,2026-01-15,Order #1005
-Revenue,57.00,2026-01-18,Order #1006
-Revenue,237.50,2026-01-20,Order #1007
-Revenue,332.50,2026-01-22,Order #1008
-Revenue,450.00,2026-01-25,Order #1009
-Revenue,40.00,2026-01-28,Order #1010
-Revenue,75.00,2026-02-01,Order #1011
-Revenue,160.00,2026-02-02,Order #1012
-Revenue,48.00,2026-02-05,Order #1013
-Revenue,1600.00,2026-02-08,Order #1014
-Revenue,440.00,2026-02-10,Order #1015
-Revenue,250.00,2026-02-12,Order #1016
-Revenue,260.00,2026-02-15,Order #1017
-Revenue,100.00,2026-02-18,Order #1018
+Expense,5000,2026-01-01,Warehouse Rent, Q1
+Expense,2000,2026-01-05,Server Hosting Fees
+Expense,8000,2026-01-10,Bulk Inventory Purchase, Tech Gear
+Revenue,1500,2026-01-01,Order #1001
+Revenue,145.5,2026-01-05,Order #1002
+Revenue,340,2026-01-10,Order #1003
+Revenue,45,2026-01-12,Order #1004
+Revenue,30,2026-01-15,Order #1005
+Revenue,57,2026-01-18,Order #1006
+Revenue,237.5,2026-01-20,Order #1007
+Revenue,332.5,2026-01-22,Order #1008
+Revenue,450,2026-01-25,Order #1009
+Revenue,40,2026-01-28,Order #1010
+Revenue,75,2026-02-01,Order #1011
+Revenue,160,2026-02-02,Order #1012
+Revenue,48,2026-02-05,Order #1013
+Revenue,1600,2026-02-08,Order #1014
+Revenue,440,2026-02-10,Order #1015
+Revenue,250,2026-02-12,Order #1016
+Revenue,260,2026-02-15,Order #1017
+Revenue,100,2026-02-18,Order #1018
 Revenue,12.75,2026-02-20,Order #1019
-Revenue,20.00,2026-02-22,Order #1020
-Revenue,165.60,2026-02-25,Order #1021
-Revenue,46.00,2026-02-28,Order #1022
-Revenue,120.00,2026-03-01,Order #1023
-Revenue,160.00,2026-03-03,Order #1024
-Revenue,270.00,2026-03-05,Order #1025
-Revenue,90.00,2026-03-08,Order #1026
-Revenue,150.00,2026-03-10,Order #1027
-Revenue,135.00,2026-03-12,Order #1028
-Revenue,105.00,2026-03-15,Order #1029
-Revenue,160.00,2026-03-18,Order #1030, Walk-in customer (Unregistered)
-Revenue,50.00,2026-03-20,Order #1031
-Revenue,50.00,2026-03-22,Order #1032
+Revenue,20,2026-02-22,Order #1020
+Revenue,165.6,2026-02-25,Order #1021
+Revenue,46,2026-02-28,Order #1022
+Revenue,120,2026-03-01,Order #1023
+Revenue,160,2026-03-03,Order #1024
+Revenue,270,2026-03-05,Order #1025
+Revenue,90,2026-03-08,Order #1026
+Revenue,150,2026-03-10,Order #1027
+Revenue,135,2026-03-12,Order #1028
+Revenue,105,2026-03-15,Order #1029
+Revenue,160,2026-03-18,Order #1030, Walk-in customer (Unregistered)
+Revenue,50,2026-03-20,Order #1031
+Revenue,50,2026-03-22,Order #1032
 Revenue,29.75,2026-03-25,Order #1033
-Revenue,25.50,2026-03-28,Order #1034
-Revenue,64.00,2026-04-01,Order #1035
-Revenue,50.00,2026-04-05,Order #1036
-Revenue,20.00,2026-04-08,Order #1037
-Revenue,27.00,2026-04-10,Order #1038
-Revenue,18.00,2026-04-12,Order #1039
-Revenue,7.50,2026-04-15,Order #1040
-Revenue,12.00,2026-04-18,Order #1041
-Revenue,10.00,2026-04-20,Order #1042
-Revenue,25.00,2026-04-22,Order #1043, Refund pending for deleted item
-Revenue,11.40,2026-04-25,Order #1044
+Revenue,25.5,2026-03-28,Order #1034
+Revenue,64,2026-04-01,Order #1035
+Revenue,50,2026-04-05,Order #1036
+Revenue,20,2026-04-08,Order #1037
+Revenue,27,2026-04-10,Order #1038
+Revenue,18,2026-04-12,Order #1039
+Revenue,7.5,2026-04-15,Order #1040
+Revenue,12,2026-04-18,Order #1041
+Revenue,10,2026-04-20,Order #1042
+Revenue,25,2026-04-22,Order #1043, Refund pending for deleted item
+Revenue,11.4,2026-04-25,Order #1044
 Revenue,12.75,2026-04-28,Order #1045
-Revenue,40.00,2026-05-01,Order #1046
-Revenue,400.00,2026-05-05,Order #1047
+Revenue,40,2026-05-01,Order #1046
+Revenue,400,2026-05-05,Order #1047

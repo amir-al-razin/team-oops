@@ -217,6 +217,9 @@ vector<Order>FileManager::loadOrders(const string& filepath,vector<Product> &pro
         if(line.empty()){
             continue;
         }
+        if(line.find("OrderID") != string::npos){
+            continue;
+        }
         auto cols = split(line,',');
         if(cols.size() < 6){
             throw FileOperationException("Invalid orders line: " + line);
@@ -242,25 +245,25 @@ vector<Order>FileManager::loadOrders(const string& filepath,vector<Product> &pro
             auto itemPairs = split(itemsStr, ';');
             for(const auto& ip : itemPairs){
                 string trimmedIp = trim(ip);
-                if(trimmedIp.empty()){
-                    continue;
-                }
+                if (trimmedIp.empty()) continue;
+            
                 auto parts = split(trimmedIp, ':');
-                if(parts.size() != 2){
+                if (parts.size() != 2) {
                     throw FileOperationException("Invalid order item: " + trimmedIp);
                 }
+                
                 int pid = stoi(trim(parts[0]));
                 int qty = stoi(trim(parts[1]));
 
                 Product* p = nullptr;
-                if(pid != -1){
+                if (pid != -1) {
                     p = findProductById(products, pid);
-                    if(!p){
-                        throw FileOperationException("Order references missing productId: " + std::to_string(pid));
+                    if (!p) {
+                        throw FileOperationException("Order references missing productId: " + to_string(pid));
                     }
+                    
                     o.addItem(p, qty);
                 }
-
             }
         }
         o.setTotalAmount(historicalTotal);
