@@ -110,6 +110,7 @@ vector<Customer*> FileManager::loadCustomers(const string& filepath) {
     // optional header
     if (getline(in, line)) {
         if (line.find("Type") == string::npos) {
+            in.clear(); // Fix: Clear stream errors before seeking
             in.seekg(0);
         }
     } else {
@@ -149,11 +150,12 @@ vector<Customer*> FileManager::loadCustomers(const string& filepath) {
                     }
                 }
             }
-
-            customers.push_back(c);
+            
+            // Fix: Moved inside the while loop so every customer is added
+            customers.push_back(c); 
         }
     } catch (...) {
-        // Prevent memory leak if parsing fails midway
+        // Fix: Restored the catch block to prevent memory leaks if parsing fails
         for (auto* c : customers) delete c;
         throw;
     }

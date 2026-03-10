@@ -1,4 +1,5 @@
 #include "Customer.h"
+using namespace std;
 
 Customer::Customer(int id, const std::string& name) : id(id), name(name) {}
 
@@ -6,11 +7,11 @@ int Customer::getId() const {
     return id;
 }
 
-const std::string& Customer::getName() const {
+const string& Customer::getName() const {
     return name;
 }
 
-const std::vector<int>& Customer::getOrderHistory() const {
+const vector<int>& Customer::getOrderHistory() const {
     return orderHistory;
 }
 
