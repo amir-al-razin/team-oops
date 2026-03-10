@@ -371,7 +371,6 @@ void MenuSystem::listOrders() {
          << setw(10) << "OrderID"
          << setw(12) << "Customer"
          << setw(15) << "Date"
-         << right
          << setw(12) << "Total"
          << setw(12) << "Finalized"
          << "\n";
@@ -387,9 +386,7 @@ void MenuSystem::listOrders() {
              << setw(10) << o.getOrderId()
              << setw(12) << cid
              << setw(15) << o.getDate()
-             << right
              << setw(12) << o.getTotalAmount()
-             << left
              << setw(12) << (o.getIsFinalized() ? "Yes" : "No")
              << "\n";
     }

@@ -221,7 +221,8 @@ vector<Order>FileManager::loadOrders(const string& filepath,vector<Product> &pro
             continue;
         }
         auto cols = split(line,',');
-        if(cols.size() < 6){
+        // Change to < 5, because an empty trailing item list makes the size 5
+        if(cols.size() < 5){
             throw FileOperationException("Invalid orders line: " + line);
         }
         int orderId = stoi(trim(cols[0]));
@@ -229,7 +230,7 @@ vector<Order>FileManager::loadOrders(const string& filepath,vector<Product> &pro
         string date = trim(cols[2]);
         double historicalTotal = stod(trim(cols[3]));
         string finalizedStr = trim(cols[4]);
-        string itemsStr = trim(cols[5]);
+        string itemsStr = (cols.size() >= 6) ? trim(cols[5]) : "";
 
         Customer* c = nullptr;
         if(customerId!=-1){
