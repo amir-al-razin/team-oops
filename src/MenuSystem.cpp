@@ -148,19 +148,19 @@ void MenuSystem::listProducts() {
     cout << "\n";
     cout << left
          << setw(6)  << "ID"
-         << setw(20) << "Name"
-         << setw(12) << "Price"
+         << setw(40) << "Name"
+         << setw(20) << "Price"
          << setw(12) << "Cost"
          << setw(8)  << "Qty"
          << "\n";
 
-    cout << "-------------------------------------------------------------\n";
+    cout << "-----------------------------------------------------------------------------------------\n";
 
     for (const auto& p : dm.products()) {
         cout << left
              << setw(6)  << p.getId()
-             << setw(20) << p.getName()
-             << setw(12) << p.getPrice()
+             << setw(40) << p.getName()
+             << setw(20) << p.getPrice()
              << setw(12) << p.getCost()
              << setw(8)  << p.getQuantity()
              << "\n";
@@ -469,9 +469,7 @@ void MenuSystem::listTransactions() {
     cout << "\n";
     cout << left
          << setw(12) << "Type"
-         << right
          << setw(12) << "Amount"
-         << left
          << setw(15) << "Date"
          << setw(25) << "Description"
          << "\n";
@@ -483,9 +481,7 @@ void MenuSystem::listTransactions() {
     for (const auto& t : tx) {
         cout << left
              << setw(12) << t.type
-             << right
              << setw(12) << t.amount
-             << left
              << setw(15) << t.date
              << setw(25) << t.description
              << "\n";
@@ -539,12 +535,11 @@ void MenuSystem::bestSellingProductsReport() {
     cout << left
          << setw(6)  << "Rank"
          << setw(8)  << "ID"
-         << setw(22) << "Name"
-         << right
+         << setw(30) << "Name"
          << setw(12) << "SoldQty"
          << "\n";
 
-    cout << "---------------------------------------------------------\n";
+    cout << "-----------------------------------------------------------------\n";
 
     int rank = 1;
     for (const auto& [pid, sold] : rows) {
@@ -560,8 +555,7 @@ void MenuSystem::bestSellingProductsReport() {
         cout << left
              << setw(6)  << rank
              << setw(8)  << pid
-             << setw(22) << name
-             << right
+             << setw(30) << name
              << setw(12) << sold
              << "\n";
 
@@ -637,13 +631,12 @@ void MenuSystem::inventoryValuationReport() {
 
     cout << left
          << setw(8)  << "ID"
-         << setw(20) << "Name"
-         << right
+         << setw(30) << "Name"
          << setw(12) << "Stock"
          << setw(15) << "Value"
          << "\n";
 
-    cout << "------------------------------------------------------\n";
+    cout << "----------------------------------------------------------------\n";
     cout << std::fixed << std::setprecision(2);
 
     for (const auto& p : dm.products()) {
@@ -652,8 +645,7 @@ void MenuSystem::inventoryValuationReport() {
 
         cout << left
              << setw(8)  << p.getId()
-             << setw(20) << p.getName()
-             << right
+             << setw(30) << p.getName()
              << setw(12) << p.getQuantity()
              << setw(15) << value
              << "\n";
@@ -812,21 +804,19 @@ void MenuSystem::smartRiskReport() {
 
     cout << left
          << setw(6)  << "ID"
-         << setw(20) << "Name"
-         << right
+         << setw(30) << "Name"
          << setw(10) << "Stock"
          << setw(10) << "Sold"
          << setw(12) << "Risk Score"
          << "\n";
 
-    cout << "------------------------------------------------------------\n";
+    cout << "----------------------------------------------------------------------\n";
     cout << std::fixed << std::setprecision(2);
 
     for (const auto& r : rows) {
         cout << left
              << setw(6)  << r.id
-             << setw(20) << r.name
-             << right
+             << setw(30) << r.name
              << setw(10) << r.stock
              << setw(10) << r.sold
              << setw(12) << r.risk
