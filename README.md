@@ -19,3 +19,4 @@ make all
 
 - Source files live in `src/` and headers in `include/`.
 - Data files are stored in `data/`.
+- Pull using `git pull --rebase origin main` since working on same branch
