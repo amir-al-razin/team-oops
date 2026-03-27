@@ -280,7 +280,8 @@ void MenuSystem::customerMenu() {
                   << "1. Add Regular Customer\n"
                   << "2. Add Premium Customer\n"
                   << "3. List Customers\n"
-                  << "4. Upgrade Regular -> Premium\n"
+                  << "4. View Customer Details\n"
+                  << "5. Upgrade Regular -> Premium\n"
                   << "0. Back\n";
 
         int choice = readInt("Select: ");
@@ -289,7 +290,8 @@ void MenuSystem::customerMenu() {
             case 1: addRegularCustomer(); dm.saveAll("data"); break;
             case 2: addPremiumCustomer(); dm.saveAll("data"); break;
             case 3: listCustomers(); break;
-            case 4: upgradeCustomerToPremium(); dm.saveAll("data"); break;
+            case 4: viewCustomerDetails(); break;
+            case 5: upgradeCustomerToPremium(); dm.saveAll("data"); break;
             case 0: return;
             default: std::cout << "Invalid choice.\n"; break;
         }
@@ -356,6 +358,51 @@ void MenuSystem::listCustomers() {
              << "\n";
     }
 }
+
+void MenuSystem::viewCustomerDetails() {
+    int id = readInt("Customer ID: ");
+
+    Customer* customer = nullptr;
+    for (auto* c : dm.customers()) {
+        if (c && c->getId() == id) {
+            customer = c;
+            break;
+        }
+    }
+
+    if (!customer) {
+        throw InvalidInputException("Customer ID not found.");
+    }
+
+    const bool isPremium = dynamic_cast<PremiumCustomer*>(customer) != nullptr;
+    double totalSpent = 0.0;
+
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "\n=== Customer Details ===\n";
+    std::cout << "ID: " << customer->getId() << "\n";
+    std::cout << "Name: " << customer->getName() << "\n";
+    std::cout << "Type: " << (isPremium ? "Premium" : "Regular") << "\n";
+    std::cout << "Discount: " << (customer->calculateDiscount() * 100.0) << "%\n";
+
+    std::cout << "Order History IDs: ";
+    const auto& history = customer->getOrderHistory();
+    if (history.empty()) {
+        std::cout << "(none)\n";
+    } else {
+        for (size_t i = 0; i < history.size(); ++i) {
+            std::cout << history[i] << (i + 1 < history.size() ? ", " : "\n");
+        }
+    }
+
+    for (const auto& o : dm.orders()) {
+        if (!o.getIsFinalized()) continue;
+        if (!o.getCustomer()) continue;
+        if (o.getCustomer()->getId() == id) totalSpent += o.getTotalAmount();
+    }
+
+    std::cout << "Total Spent: " << totalSpent << "\n";
+}
+
 void MenuSystem::upgradeCustomerToPremium() {
     int id = readInt("Customer ID to upgrade: ");
     double loyalty = readDouble("New loyalty (fraction like 0.10 for 10%): ");

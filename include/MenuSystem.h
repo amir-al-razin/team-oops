@@ -34,6 +34,7 @@ private:
     void addRegularCustomer();
     void addPremiumCustomer();
     void listCustomers();
+    void viewCustomerDetails();
     void upgradeCustomerToPremium();
     void topCustomersReport();
 
