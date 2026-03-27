@@ -49,8 +49,8 @@ None currently open from the initial bug batch.
   - `README.md` and `docs/API_REFERENCE.md` completed.
 - Task 8.3 (Done)
   - Sample data documented in `README.md`.
-- Task 8.4 (Done)
-  - Final verification matrix completed in `docs/FINAL_VERIFICATION_MATRIX.md`.
+- Task 8.4 (Partial)
+  - Final verification matrix completed in `docs/FINAL_VERIFICATION_MATRIX.md`; fresh-environment/Codespaces run remains.
 
 ## Phase 9
 - Task 9.1 (Done)
@@ -61,4 +61,4 @@ None currently open from the initial bug batch.
   - Final review checklist completed in `docs/SUBMISSION_CHECKLIST.md` and PRD status.
 
 ## 3) Suggested Implementation Order
-- Project implementation/testing/documentation backlog is complete.
+- Priority 1: Run one clean verification in a fresh environment (GitHub Codespaces or equivalent).

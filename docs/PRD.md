@@ -464,9 +464,10 @@ This implementation plan provides a structured, task-based approach to building 
 
 ### Task 8.4: Final Testing
 - [x] Clean build test (delete all .o files, rebuild)
-- [x] Test on fresh environment (GitHub Codespaces)
+- [ ] Test on fresh environment (GitHub Codespaces)
 - [x] Verify all curriculum topics are demonstrated
 - [x] Cross-reference with PRD requirements (FR-01 through FR-14)
+  - **Current status note:** Linux local clean-build validation is complete; GitHub Codespaces/fresh-cloud run remains pending.
 
 ---
 
