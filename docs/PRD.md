@@ -182,14 +182,14 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 3.2: Implement FileManager Class
 **Curriculum: Week 10 - Streams & File I/O**
 
-- [ ] Create `include/FileManager.h`
+- [x] Create `include/FileManager.h`
   - Static methods for each entity type:
     - `static vector<Product> loadProducts(string filepath)`
     - `static void saveProducts(const vector<Product>&, string filepath)`
     - `static vector<Customer*> loadCustomers(string filepath)`
     - `static void saveCustomers(const vector<Customer*>&, string filepath)`
     - Similar for Orders and Finance
-- [ ] Create `src/FileManager.cpp`
+- [x] Create `src/FileManager.cpp`
   - Implement `loadProducts()`:
     - Open `ifstream`
     - Read line by line
@@ -203,13 +203,14 @@ This implementation plan provides a structured, task-based approach to building 
     - Close file
   - Repeat for other entity types
   - **Important:** Handle polymorphism for Customer (store type field, reconstruct RegularCustomer or PremiumCustomer)
+  - **Current status note:** Implemented, but order loading contains a known workaround/hack that should be refactored.
 
 ### Task 3.3: Implement Auto-Save Mechanism
-- [ ] Create `DataManager` wrapper class:
+- [x] Create `DataManager` wrapper class:
   - Holds repositories for all entities
   - Method: `saveAll()` - calls FileManager save methods
   - Method: `loadAll()` - calls FileManager load methods
-- [ ] Integrate auto-save:
+- [x] Integrate auto-save:
   - Call `saveAll()` after every critical operation (add/remove/update)
   - Call `saveAll()` on application exit
 
@@ -218,23 +219,23 @@ This implementation plan provides a structured, task-based approach to building 
 ## Phase 4: Business Logic & Automation
 
 ### Task 4.1: Implement Inventory Alerts
-- [ ] In `Product` class, add method:
+- [x] In `Product` class, add method:
   - `bool isLowStock(int threshold = 10)`
-- [ ] Create utility function in main or InventoryManager:
+- [x] Create utility function in main or InventoryManager:
   - `void checkLowStock(Repository<Product>& repo)`
   - Iterate through products, display warnings
 
 ### Task 4.2: Implement Order Finalization Logic
-- [ ] In `Order::finalize()`:
+- [x] In `Order::finalize()`:
   - Calculate total with discount using `customer->calculateDiscount()`
   - Iterate through items and call `product->updateStock(-qty)`
   - Call `Finance::recordRevenue(totalAmount)`
   - Add order ID to customer's history
   - Set `isFinalized = true`
-- [ ] Add validation: cannot finalize twice
+- [x] Add validation: cannot finalize twice
 
 ### Task 4.3: Implement Stock Addition as Expense
-- [ ] When adding new product or restocking:
+- [x] When adding new product or restocking:
   - Calculate expense: `cost * quantity`
   - Call `Finance::recordExpense(expense, "Stock purchase")`
 
@@ -242,9 +243,10 @@ This implementation plan provides a structured, task-based approach to building 
 - [ ] Create method `void removeStock(Product& product, int qty, string reason)`
   - Reduce quantity without revenue
   - If reason == "damage" or "expiry", record as loss in finance
+  - **Current status note:** Implemented via `MenuSystem::removeStockAsLoss()` workflow; dedicated Product-level API is still pending.
 
 ### Task 4.5: Implement Customer Upgrade Logic
-- [ ] Create function `void upgradeToPreium(Customer*& customer, double loyaltyPercent)`:
+- [x] Create function `void upgradeToPreium(Customer*& customer, double loyaltyPercent)`:
   - Create new PremiumCustomer with same ID, name, history
   - Delete old RegularCustomer
   - Update pointer
@@ -255,11 +257,11 @@ This implementation plan provides a structured, task-based approach to building 
 ## Phase 5: User Interface - Menu System
 
 ### Task 5.1: Design Main Menu Structure
-- [ ] Create `include/MenuSystem.h`
+- [x] Create `include/MenuSystem.h`
   - Class `MenuSystem` with methods for each menu
   - Method: `void displayMainMenu()`
   - Method: `void handleMainMenuChoice(int choice)`
-- [ ] Create hierarchy:
+- [x] Create hierarchy:
   ```
   Main Menu
     1. Inventory Management
@@ -269,6 +271,7 @@ This implementation plan provides a structured, task-based approach to building 
     5. System Reports
     6. Exit
   ```
+  - **Current status note:** Menu hierarchy is implemented with equivalent behavior (`0` used for Exit).
 
 ### Task 5.2: Implement Inventory Management Menu
 - [ ] Create submenu:
@@ -287,6 +290,7 @@ This implementation plan provides a structured, task-based approach to building 
   - Option 3: Get product by ID, prompt for new values, update
   - Option 4: Remove product, handle as loss
   - Option 5: Call low stock check function
+  - **Current status note:** Partially implemented. Add/restock/list/low-stock and stock-loss removal exist; update/remove-product flows are pending.
 
 ### Task 5.3: Implement Customer Management Menu
 - [ ] Create submenu:
@@ -303,6 +307,7 @@ This implementation plan provides a structured, task-based approach to building 
   - Option 2: Display all customers with type
   - Option 3: Show customer info + order history
   - Option 4: Upgrade logic
+  - **Current status note:** Partially implemented. Add/list/upgrade exist; detailed single-customer view is pending.
 
 ### Task 5.4: Implement Order Processing Menu
 - [ ] Create submenu:
@@ -320,6 +325,7 @@ This implementation plan provides a structured, task-based approach to building 
   - Show preview with discount
   - Confirm and finalize
   - Handle exceptions (insufficient stock)
+  - **Current status note:** Partially implemented. Core create/add/finalize flow exists; integrated preview/details flow is incomplete.
 
 ### Task 5.5: Implement Financial Reports Menu
 - [ ] Create submenu:
@@ -332,9 +338,10 @@ This implementation plan provides a structured, task-based approach to building 
     5. Back to Main Menu
   ```
 - [ ] Implement each report using Finance class methods
+  - **Current status note:** Partially implemented. Summary and transaction list exist; full PRD report breakdown is pending.
 
 ### Task 5.6: Implement System Reports Menu
-- [ ] Create submenu:
+- [x] Create submenu:
   ```
   Reports Menu
     1. Best Selling Products
@@ -343,20 +350,22 @@ This implementation plan provides a structured, task-based approach to building 
     4. Risk Inventory (High Stock, Low Sales)
     5. Back to Main Menu
   ```
-- [ ] Implement analytics:
+- [x] Implement analytics:
   - Best Sellers: Count order occurrences, sort products
   - Top Customers: Sum order totals per customer, sort
   - Inventory Value: Sum `price * quantity` for all products
   - Risk Inventory: Products with high stock but low sales frequency
+  - **Current status note:** Implemented and null-customer crash is fixed.
 
 ### Task 5.7: Implement Input Validation & Error Handling
 - [ ] Create utility functions:
   - `int getIntInput(string prompt, int min, int max)`
   - `double getDoubleInput(string prompt, double min, double max)`
   - `string getStringInput(string prompt)`
-- [ ] Wrap all inputs in try-catch blocks
-- [ ] Clear input buffer on invalid input
-- [ ] Display user-friendly error messages
+- [x] Wrap all inputs in try-catch blocks
+- [x] Clear input buffer on invalid input
+- [x] Display user-friendly error messages
+  - **Current status note:** Equivalent helpers exist (`readInt`, `readDouble`, `readLine`) with different signatures.
 
 ---
 
@@ -365,28 +374,30 @@ This implementation plan provides a structured, task-based approach to building 
 ### Task 6.1: Create Application Controller
 **Curriculum: Weeks 12-13 - Multi-file Programming**
 
-- [ ] Create `include/Application.h`
+- [x] Create `include/Application.h`
   - Class `Application` (Singleton pattern optional)
   - Attributes: repositories, finance, menuSystem
   - Methods: `initialize()`, `run()`, `shutdown()`
-- [ ] Create `src/Application.cpp`
+- [x] Create `src/Application.cpp`
   - `initialize()`: Load all data from files
   - `run()`: Main loop calling menu system
   - `shutdown()`: Save all data, cleanup
+  - **Current status note:** Files and `run()` flow exist, but explicit `initialize()` / `shutdown()` methods are not split out yet.
 
 ### Task 6.2: Implement Main Entry Point
-- [ ] Create `src/main.cpp`
+- [x] Create `src/main.cpp`
   - Create Application instance
   - Call `initialize()`
   - Call `run()`
   - Handle top-level exceptions
   - Call `shutdown()` on exit or Ctrl+C
+  - **Current status note:** Entry point exists and runs application, but dedicated initialize/shutdown/exception wrapper behavior is only partially aligned.
 
 ### Task 6.3: Integrate All Components
-- [ ] Link all classes together in Application
-- [ ] Ensure repositories are passed correctly
-- [ ] Verify polymorphism works (Customer pointers)
-- [ ] Test file save/load cycle
+- [x] Link all classes together in Application
+- [x] Ensure repositories are passed correctly
+- [x] Verify polymorphism works (Customer pointers)
+- [x] Test file save/load cycle
 
 ---
 
@@ -447,7 +458,7 @@ This implementation plan provides a structured, task-based approach to building 
 - [ ] Add inline code documentation (Doxygen-style optional)
 
 ### Task 8.3: Create Sample Data
-- [ ] Populate `data/` folder with sample files:
+- [x] Populate `data/` folder with sample files:
   - 10-15 sample products
   - 5-7 sample customers (mix of Regular/Premium)
   - 3-5 sample orders
@@ -523,14 +534,14 @@ make all
 
 ## Success Criteria
 
-- ✅ All 14 functional requirements (FR-01 to FR-14) implemented
-- ✅ All 4 non-functional requirements met
-- ✅ All 8 curriculum topics demonstrated
-- ✅ Data persists across sessions
-- ✅ No crashes on invalid input
-- ✅ Clean compilation with no warnings
-- ✅ Code follows header/implementation structure
-- ✅ Documentation complete and accurate
+- [ ] All 14 functional requirements (FR-01 to FR-14) implemented
+- [ ] All 4 non-functional requirements met
+- [x] All 8 curriculum topics demonstrated
+- [x] Data persists across sessions
+- [ ] No crashes on invalid input
+- [x] Clean compilation with no warnings
+- [x] Code follows header/implementation structure
+- [ ] Documentation complete and accurate
 
 ---
 
