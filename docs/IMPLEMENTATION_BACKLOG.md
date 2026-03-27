@@ -35,30 +35,30 @@ None currently open from the initial bug batch.
   - Main entry calls initialize/run/shutdown, handles top-level exceptions, and includes Ctrl+C shutdown handling.
 
 ## Phase 7
-- Task 7.1 (Not done)
-  - Manual unit test checklist is not documented/executed as a tracked artifact.
-- Task 7.2 (Not done)
-  - Integration test workflows are not documented/executed as a tracked artifact.
-- Task 7.3 (Not done)
-  - UAT checklist is not documented/executed as a tracked artifact.
+- Task 7.1 (Done)
+  - Manual unit-level testing documented and executed in `docs/TESTING_REPORT.md`.
+- Task 7.2 (Done)
+  - Integration workflows documented and executed in `docs/TESTING_REPORT.md`.
+- Task 7.3 (Done)
+  - UAT-style navigation/input/report checks documented in `docs/TESTING_REPORT.md`.
 
 ## Phase 8
-- Task 8.1 (Partial)
-  - Cleanup and consistency pass still pending.
-- Task 8.2 (Not done)
-  - API reference and full documentation remain incomplete.
-- Task 8.3 (Partial)
-  - Sample data exists, but README documentation for sample data is pending.
-- Task 8.4 (Not done)
-  - Final formal verification matrix is pending.
+- Task 8.1 (Done)
+  - Cleanup/consistency pass completed.
+- Task 8.2 (Done)
+  - `README.md` and `docs/API_REFERENCE.md` completed.
+- Task 8.3 (Done)
+  - Sample data documented in `README.md`.
+- Task 8.4 (Done)
+  - Final verification matrix completed in `docs/FINAL_VERIFICATION_MATRIX.md`.
 
 ## Phase 9
-- Task 9.1 (Not done)
-  - Demo script not prepared.
-- Task 9.2 (Not done)
-  - Submission package checklist not complete.
-- Task 9.3 (Not done)
-  - Final review checklist not completed.
+- Task 9.1 (Done)
+  - Demo script prepared in `docs/DEMO_SCRIPT.md`.
+- Task 9.2 (Done)
+  - Submission package checklist completed in `docs/SUBMISSION_CHECKLIST.md`.
+- Task 9.3 (Done)
+  - Final review checklist completed in `docs/SUBMISSION_CHECKLIST.md` and PRD status.
 
 ## 3) Suggested Implementation Order
-- Priority 1: Execute formal testing phases (7 to 9).
+- Project implementation/testing/documentation backlog is complete.
