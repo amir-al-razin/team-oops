@@ -29,14 +29,8 @@ None currently open from the initial bug batch.
   - Stock-loss workflow exists in menu (`removeStockAsLoss`), but dedicated `Product`-level method signature from PRD is not added.
 
 ## Phase 5
-- Task 5.2 (Partial)
-  - Inventory menu lacks update product and remove product with loss handling.
-- Task 5.3 (Partial)
-  - Missing single customer detail view with history focus.
 - Task 5.4 (Partial)
   - Missing integrated preview/details flow in order creation journey.
-- Task 5.5 (Partial)
-  - Finance submenu/report coverage is below PRD target.
 - Task 5.7 (Partial)
   - Input helpers exist with different names/signatures from PRD utility spec.
 

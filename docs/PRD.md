@@ -274,7 +274,7 @@ This implementation plan provides a structured, task-based approach to building 
   - **Current status note:** Menu hierarchy is implemented with equivalent behavior (`0` used for Exit).
 
 ### Task 5.2: Implement Inventory Management Menu
-- [ ] Create submenu:
+- [x] Create submenu:
   ```
   Inventory Menu
     1. Add New Product
@@ -284,16 +284,16 @@ This implementation plan provides a structured, task-based approach to building 
     5. Check Low Stock
     6. Back to Main Menu
   ```
-- [ ] Implement each option:
+- [x] Implement each option:
   - Option 1: Prompt for product details, validate, add to repository, record expense
   - Option 2: Display all products in formatted table
   - Option 3: Get product by ID, prompt for new values, update
   - Option 4: Remove product, handle as loss
   - Option 5: Call low stock check function
-  - **Current status note:** Partially implemented. Add/restock/list/low-stock and stock-loss removal exist; update/remove-product flows are pending.
+  - **Current status note:** Implemented. Menu includes required flows plus restock and stock-loss removal.
 
 ### Task 5.3: Implement Customer Management Menu
-- [ ] Create submenu:
+- [x] Create submenu:
   ```
   Customer Menu
     1. Register New Customer
@@ -302,12 +302,12 @@ This implementation plan provides a structured, task-based approach to building 
     4. Upgrade to Premium
     5. Back to Main Menu
   ```
-- [ ] Implement each option:
+- [x] Implement each option:
   - Option 1: Prompt for name, type, create appropriate customer object
   - Option 2: Display all customers with type
   - Option 3: Show customer info + order history
   - Option 4: Upgrade logic
-  - **Current status note:** Partially implemented. Add/list/upgrade exist; detailed single-customer view is pending.
+  - **Current status note:** Implemented.
 
 ### Task 5.4: Implement Order Processing Menu
 - [ ] Create submenu:
@@ -328,7 +328,7 @@ This implementation plan provides a structured, task-based approach to building 
   - **Current status note:** Partially implemented. Core create/add/finalize flow exists; integrated preview/details flow is incomplete.
 
 ### Task 5.5: Implement Financial Reports Menu
-- [ ] Create submenu:
+- [x] Create submenu:
   ```
   Finance Menu
     1. View Revenue Summary
@@ -337,8 +337,8 @@ This implementation plan provides a structured, task-based approach to building 
     4. Transaction History
     5. Back to Main Menu
   ```
-- [ ] Implement each report using Finance class methods
-  - **Current status note:** Partially implemented. Summary and transaction list exist; full PRD report breakdown is pending.
+- [x] Implement each report using Finance class methods
+  - **Current status note:** Implemented with dedicated revenue, expense, profit/loss, and transaction views.
 
 ### Task 5.6: Implement System Reports Menu
 - [x] Create submenu:
