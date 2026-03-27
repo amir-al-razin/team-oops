@@ -15,7 +15,7 @@ public:
     double getPrice() const;
     double getCost() const;
     int getQuantity() const;
-    //bool isLowStock(int threshold = 10) const;
+    bool isLowStock(int threshold = 10) const;
     //void checkLowStock(const std::vector<Product>& products);
 
     void setId(int id);

@@ -172,7 +172,7 @@ void MenuSystem::lowStockAlert() {
     bool any = false;
 
     for (const auto& p : dm.products()) {
-        if (p.getQuantity() < threshold) {
+        if (p.isLowStock(threshold)) {
             any = true;
             std::cout << "LOW STOCK -> ID " << p.getId()
                       << " (" << p.getName() << ") Qty: " << p.getQuantity() << "\n";

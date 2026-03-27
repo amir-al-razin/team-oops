@@ -35,6 +35,10 @@ int Product::getQuantity() const {
     return quantity;
 }
 
+bool Product::isLowStock(int threshold) const {
+    return quantity < threshold;
+}
+
 void Product::setId(int newId) {
     if (newId <= 0) {
         throw std::invalid_argument("Product id must be positive.");
