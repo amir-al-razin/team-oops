@@ -23,6 +23,7 @@ private:
     // Inventory actions
     void addProduct();
     void restockProduct();
+    void removeStockAsLoss();
     void listProducts();
     void lowStockAlert();
     void inventoryValuationReport();

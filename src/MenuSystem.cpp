@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <limits>
 #include <stdexcept>
+#include <cctype>
 
 #include "Exceptions.h"
 #include "RegularCustomer.h"
@@ -87,8 +88,9 @@ void MenuSystem::inventoryMenu() {
         std::cout << "\n--- Inventory Menu ---\n"
                   << "1. Add Product\n"
                   << "2. Restock Product\n"
-                  << "3. List Products\n"
-                  << "4. Low Stock Alert\n"
+                  << "3. Remove Stock (Loss)\n"
+                  << "4. List Products\n"
+                  << "5. Low Stock Alert\n"
                   << "0. Back\n";
 
         int choice = readInt("Select: ");
@@ -96,8 +98,9 @@ void MenuSystem::inventoryMenu() {
         switch (choice) {
             case 1: addProduct(); dm.saveAll("data"); break;
             case 2: restockProduct(); dm.saveAll("data"); break;
-            case 3: listProducts(); break;
-            case 4: lowStockAlert(); break;
+            case 3: removeStockAsLoss(); dm.saveAll("data"); break;
+            case 4: listProducts(); break;
+            case 5: lowStockAlert(); break;
             case 0: return;
             default: std::cout << "Invalid choice.\n"; break;
         }
@@ -134,6 +137,35 @@ void MenuSystem::restockProduct() {
             std::cout << "Restocked.\n";
             return;
         }
+    }
+
+    throw InvalidInputException("Product ID not found.");
+}
+
+void MenuSystem::removeStockAsLoss() {
+    int id = readInt("Product ID to remove stock from: ");
+    int qty = readInt("Quantity to remove: ");
+    std::string reason = readLine("Reason (damage/expiry/loss/other): ");
+
+    std::string normalized = reason;
+    std::transform(normalized.begin(), normalized.end(), normalized.begin(),
+                   [](unsigned char ch) { return static_cast<char>(std::tolower(ch)); });
+
+    for (auto& p : dm.products()) {
+        if (p.getId() != id) continue;
+
+        p.updateStock(-qty);
+
+        if (normalized == "damage" || normalized == "expiry" || normalized == "loss") {
+            dm.finance().recordExpense(
+                p.getCost() * qty,
+                "Stock loss (" + normalized + ") for product #" + std::to_string(id),
+                "N/A"
+            );
+        }
+
+        std::cout << "Stock removed.\n";
+        return;
     }
 
     throw InvalidInputException("Product ID not found.");
