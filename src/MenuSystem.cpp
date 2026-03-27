@@ -572,6 +572,7 @@ void MenuSystem::topCustomersReport() {
 
     for (const auto& o : dm.orders()) {
         if (!o.getIsFinalized()) continue;
+        if (!o.getCustomer()) continue; // Skip guest/unassigned finalized orders
 
         int cid = o.getCustomer()->getId();
         spending[cid] += o.getTotalAmount();
@@ -601,7 +602,7 @@ void MenuSystem::topCustomersReport() {
     for (auto& [cid, total] : rows) {
         std::string name = "(unknown)";
         for (auto* c : dm.customers()) {
-            if (c->getId() == cid) {
+            if (c && c->getId() == cid) {
                 name = c->getName();
                 break;
             }
