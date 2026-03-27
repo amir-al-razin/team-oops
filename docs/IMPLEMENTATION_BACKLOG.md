@@ -24,13 +24,7 @@ None currently open from the initial bug batch.
 
 ## 2) Pending or Partial PRD Tasks
 
-## Phase 4
-- Task 4.4 (Partial)
-  - Stock-loss workflow exists in menu (`removeStockAsLoss`), but dedicated `Product`-level method signature from PRD is not added.
-
 ## Phase 5
-- Task 5.4 (Partial)
-  - Missing integrated preview/details flow in order creation journey.
 - Task 5.7 (Partial)
   - Input helpers exist with different names/signatures from PRD utility spec.
 
@@ -67,6 +61,6 @@ None currently open from the initial bug batch.
   - Final review checklist not completed.
 
 ## 3) Suggested Implementation Order
-- Priority 1: Complete remaining Phase 4 gap (4.4 Product-level method/API alignment).
-- Priority 2: Complete missing menu/report workflows in Phase 5.
-- Priority 3: Finish Phase 6 lifecycle alignment and formal testing phases (7-9).
+- Priority 1: Finish remaining Phase 5 gap (5.7 input utility API alignment).
+- Priority 2: Finish Phase 6 lifecycle alignment.
+- Priority 3: Execute formal testing phases (7 to 9).

@@ -240,10 +240,10 @@ This implementation plan provides a structured, task-based approach to building 
   - Call `Finance::recordExpense(expense, "Stock purchase")`
 
 ### Task 4.4: Implement Stock Removal (Loss Handling)
-- [ ] Create method `void removeStock(Product& product, int qty, string reason)`
+- [x] Create method `void removeStock(Product& product, int qty, string reason)`
   - Reduce quantity without revenue
   - If reason == "damage" or "expiry", record as loss in finance
-  - **Current status note:** Implemented via `MenuSystem::removeStockAsLoss()` workflow; dedicated Product-level API is still pending.
+  - **Current status note:** Implemented via `MenuSystem::removeStock(...)` + `removeStockAsLoss()` workflow.
 
 ### Task 4.5: Implement Customer Upgrade Logic
 - [x] Create function `void upgradeToPreium(Customer*& customer, double loyaltyPercent)`:
@@ -310,7 +310,7 @@ This implementation plan provides a structured, task-based approach to building 
   - **Current status note:** Implemented.
 
 ### Task 5.4: Implement Order Processing Menu
-- [ ] Create submenu:
+- [x] Create submenu:
   ```
   Order Menu
     1. Create New Order
@@ -318,14 +318,14 @@ This implementation plan provides a structured, task-based approach to building 
     3. View Order Details
     4. Back to Main Menu
   ```
-- [ ] Implement "Create New Order" workflow:
+- [x] Implement "Create New Order" workflow:
   - Select customer by ID
   - Display available products
   - Add items to cart (loop)
   - Show preview with discount
   - Confirm and finalize
   - Handle exceptions (insufficient stock)
-  - **Current status note:** Partially implemented. Core create/add/finalize flow exists; integrated preview/details flow is incomplete.
+  - **Current status note:** Implemented with inline cart flow plus optional immediate finalization; standalone add/finalize options are also preserved.
 
 ### Task 5.5: Implement Financial Reports Menu
 - [x] Create submenu:
