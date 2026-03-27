@@ -23,6 +23,7 @@ private:
     // Inventory actions
     void addProduct();
     void restockProduct();
+    void removeStock(Product& product, int qty, const std::string& reason);
     void removeStockAsLoss();
     void updateProduct();
     void removeProduct();

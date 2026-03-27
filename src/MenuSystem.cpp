@@ -146,27 +146,31 @@ void MenuSystem::restockProduct() {
     throw InvalidInputException("Product ID not found.");
 }
 
+void MenuSystem::removeStock(Product& product, int qty, const std::string& reason) {
+    std::string normalized = reason;
+    std::transform(normalized.begin(), normalized.end(), normalized.begin(),
+                   [](unsigned char ch) { return static_cast<char>(std::tolower(ch)); });
+
+    product.updateStock(-qty);
+
+    if (normalized == "damage" || normalized == "expiry" || normalized == "loss") {
+        dm.finance().recordExpense(
+            product.getCost() * qty,
+            "Stock loss (" + normalized + ") for product #" + std::to_string(product.getId()),
+            "N/A"
+        );
+    }
+}
+
 void MenuSystem::removeStockAsLoss() {
     int id = readInt("Product ID to remove stock from: ");
     int qty = readInt("Quantity to remove: ");
     std::string reason = readLine("Reason (damage/expiry/loss/other): ");
 
-    std::string normalized = reason;
-    std::transform(normalized.begin(), normalized.end(), normalized.begin(),
-                   [](unsigned char ch) { return static_cast<char>(std::tolower(ch)); });
-
     for (auto& p : dm.products()) {
         if (p.getId() != id) continue;
 
-        p.updateStock(-qty);
-
-        if (normalized == "damage" || normalized == "expiry" || normalized == "loss") {
-            dm.finance().recordExpense(
-                p.getCost() * qty,
-                "Stock loss (" + normalized + ") for product #" + std::to_string(id),
-                "N/A"
-            );
-        }
+        removeStock(p, qty, reason);
 
         std::cout << "Stock removed.\n";
         return;
