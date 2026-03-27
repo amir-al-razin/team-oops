@@ -25,6 +25,7 @@ private:
     void restockProduct();
     void removeStockAsLoss();
     void updateProduct();
+    void removeProduct();
     void listProducts();
     void lowStockAlert();
     void inventoryValuationReport();

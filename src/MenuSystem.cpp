@@ -90,8 +90,9 @@ void MenuSystem::inventoryMenu() {
                   << "2. Restock Product\n"
                   << "3. Remove Stock (Loss)\n"
                   << "4. Update Product\n"
-                  << "5. List Products\n"
-                  << "6. Low Stock Alert\n"
+                  << "5. Remove Product\n"
+                  << "6. List Products\n"
+                  << "7. Low Stock Alert\n"
                   << "0. Back\n";
 
         int choice = readInt("Select: ");
@@ -101,8 +102,9 @@ void MenuSystem::inventoryMenu() {
             case 2: restockProduct(); dm.saveAll("data"); break;
             case 3: removeStockAsLoss(); dm.saveAll("data"); break;
             case 4: updateProduct(); dm.saveAll("data"); break;
-            case 5: listProducts(); break;
-            case 6: lowStockAlert(); break;
+            case 5: removeProduct(); dm.saveAll("data"); break;
+            case 6: listProducts(); break;
+            case 7: lowStockAlert(); break;
             case 0: return;
             default: std::cout << "Invalid choice.\n"; break;
         }
@@ -190,6 +192,38 @@ void MenuSystem::updateProduct() {
         p.setQuantity(qty);
 
         std::cout << "Product updated.\n";
+        return;
+    }
+
+    throw InvalidInputException("Product ID not found.");
+}
+
+void MenuSystem::removeProduct() {
+    int id = readInt("Product ID to remove: ");
+
+    // Reject removal if this product is referenced by any existing order.
+    for (const auto& o : dm.orders()) {
+        for (const auto& item : o.getItems()) {
+            Product* p = item.first;
+            if (p && p->getId() == id) {
+                throw InvalidInputException("Cannot remove product: it is referenced by existing orders.");
+            }
+        }
+    }
+
+    for (auto it = dm.products().begin(); it != dm.products().end(); ++it) {
+        if (it->getId() != id) continue;
+
+        if (it->getQuantity() > 0) {
+            dm.finance().recordExpense(
+                it->getCost() * it->getQuantity(),
+                "Product removal loss for product #" + std::to_string(id),
+                "N/A"
+            );
+        }
+
+        dm.products().erase(it);
+        std::cout << "Product removed.\n";
         return;
     }
 
