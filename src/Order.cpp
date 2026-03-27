@@ -68,6 +68,25 @@ void Order::addItem(Product* product, int qty) {
     items.emplace_back(product, qty);
 }
 
+void Order::addLoadedItem(Product* product, int qty) {
+    if (!product) {
+        throw InvalidInputException("Product is null.");
+    }
+    if (qty <= 0) {
+        throw InvalidInputException("Quantity must be positive.");
+    }
+
+    // Merge duplicate product rows while reconstructing persisted orders.
+    for (auto& it : items) {
+        if (it.first == product) {
+            it.second += qty;
+            return;
+        }
+    }
+
+    items.emplace_back(product, qty);
+}
+
 void Order::setTotalAmount(double amount) {
     totalAmount = amount;
 }

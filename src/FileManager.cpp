@@ -262,13 +262,9 @@ vector<Order>FileManager::loadOrders(const string& filepath,vector<Product> &pro
                     if (!p) {
                         throw FileOperationException("Order references missing productId: " + to_string(pid));
                     }
-                   // --- THE TIME TRAVEL HACK ---
-                    int originalStock = p->getQuantity();
-                    p->setQuantity(originalStock + qty + 100); // Safely inflate
-                    
-                    o.addItem(p, qty);
-                    
-                    p->setQuantity(originalStock); // Restore original stock
+
+                    // Rebuild historical items without validating against current stock.
+                    o.addLoadedItem(p, qty);
                 }
             }
         }

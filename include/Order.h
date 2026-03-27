@@ -26,6 +26,7 @@ public:
 
     // Core operations
     void addItem(Product* product, int quantity);
+    void addLoadedItem(Product* product, int quantity); // Used only by persistence loader
     void removeItem(Product* product);
     double calculateTotal();                  // Calculates subtotal (no discount)
     void finalize(Finance& finance);          // Applies discount + updates stock + records revenue
