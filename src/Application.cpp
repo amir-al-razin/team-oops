@@ -2,9 +2,9 @@
 #include <iostream>
 
 Application::Application(std::string dataDir)
-    : dm(), menu(dm), dataDir(std::move(dataDir)) {}
+    : dm(), menu(dm), dataDir(std::move(dataDir)), safeToSave(false) {}
 
-void Application::run() {
+void Application::initialize() {
     std::cout << R"(
 
           ██████╗  █████╗ ███████╗███████╗███╗   ███╗███████╗███╗   ██╗████████╗
@@ -29,8 +29,6 @@ void Application::run() {
     std::cout << "                             \033[36mDeveloped by Basement Dwellers Team\033[0m\n";
     std::cout << "                        \033[33mCSE 4301 - Object Oriented Programming Project\033[0m\n\n";
 
-    bool safeToSave = false; // THE SAFETY LOCK
-
     try {
         dm.loadAll(dataDir);
         safeToSave = true; // Only unlocks if loading finishes without exceptions
@@ -38,10 +36,15 @@ void Application::run() {
     } catch (const std::exception& e) {
         std::cout << "\nCRITICAL WARNING: Could not load data (" << e.what() << ").\n";
         std::cout << "Starting with empty data. Changes will NOT be saved to prevent data loss.\n\n";
+        safeToSave = false;
     }
+}
 
+void Application::run() {
     menu.mainLoop();
+}
 
+void Application::shutdown() {
     // Only save if it's safe!
     if (safeToSave) {
         try {

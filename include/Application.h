@@ -10,10 +10,13 @@ private:
     DataManager dm;
     MenuSystem menu;
     std::string dataDir;
+    bool safeToSave;
 
 public:
     explicit Application(std::string dataDir = "data");
+    void initialize();
     void run();
+    void shutdown();
 };
 
 #endif
