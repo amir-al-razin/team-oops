@@ -45,6 +45,9 @@ private:
     void finalizeOrder();
 
     // Finance actions
+    void showRevenueSummary();
+    void showExpenseSummary();
+    void showProfitLossReport();
     void showFinanceSummary();
     void listTransactions();
     void bestSellingProductsReport();

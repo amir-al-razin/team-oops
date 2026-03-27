@@ -569,19 +569,35 @@ void MenuSystem::finalizeOrder() {
 void MenuSystem::financeMenu() {
     while (true) {
         std::cout << "\n--- Finance Menu ---\n"
-                  << "1. Show Summary\n"
-                  << "2. List Transactions\n"
+                  << "1. View Revenue Summary\n"
+                  << "2. View Expense Summary\n"
+                  << "3. Profit/Loss Report\n"
+                  << "4. Transaction History\n"
                   << "0. Back\n";
 
         int choice = readInt("Select: ");
 
         switch (choice) {
-            case 1: showFinanceSummary(); break;
-            case 2: listTransactions(); break;
+            case 1: showRevenueSummary(); break;
+            case 2: showExpenseSummary(); break;
+            case 3: showProfitLossReport(); break;
+            case 4: listTransactions(); break;
             case 0: return;
             default: std::cout << "Invalid choice.\n"; break;
         }
     }
+}
+
+void MenuSystem::showRevenueSummary() {
+    std::cout << "\nTotal Revenue: " << dm.finance().getTotalRevenue() << "\n";
+}
+
+void MenuSystem::showExpenseSummary() {
+    std::cout << "\nTotal Expenses: " << dm.finance().getTotalExpenses() << "\n";
+}
+
+void MenuSystem::showProfitLossReport() {
+    std::cout << "\nProfit/Loss: " << dm.finance().calculateProfit() << "\n";
 }
 
 void MenuSystem::showFinanceSummary() {
