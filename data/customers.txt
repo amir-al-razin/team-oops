@@ -39,4 +39,4 @@ ID,Name,Type,LoyaltyPercentage,OrderIDs
 138,Shayera Hol,Regular,0,1047
 139,John Stewart,Premium,0.12,1048
 140,J'onn J'onzz,Regular,0,1049
-141,Wally West,Regular,0,1050
+141,Wally West,Regular,0,1050;1050

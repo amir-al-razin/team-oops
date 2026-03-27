@@ -1,5 +1,5 @@
 TotalRevenue,TotalExpenses
-8397.75,15000
+31492.8,15000
 TransactionType,Amount,Date,Description
 Expense,5000,2026-01-01,Warehouse Rent, Q1
 Expense,2000,2026-01-05,Server Hosting Fees
@@ -51,3 +51,4 @@ Revenue,11.4,2026-04-25,Order #1044
 Revenue,12.75,2026-04-28,Order #1045
 Revenue,40,2026-05-01,Order #1046
 Revenue,400,2026-05-05,Order #1047
+Revenue,23095,2026-05-15,Order #1050

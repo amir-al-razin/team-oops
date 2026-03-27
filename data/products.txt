@@ -1,10 +1,10 @@
 ID,Name,Price,Cost,Quantity
-1,Gaming Laptop,1500,1000,10
+1,Gaming Laptop,1500,1000,5
 2,Mechanical Keyboard,120.5,50,48
 3,Wireless Mouse,25,10,0
-4,Server Rack,15000,10000,2
-5,Monitor Stand,45,15,100
-6,USB-C Hub,30,12,55
+4,Server Rack,15000,10000,1
+5,Monitor Stand,45,15,93
+6,USB-C Hub,30,12,54
 7,4K Monitor,400,250,15
 8,Ethernet Cable 10ft,15,3,200
 9,Webcam 1080p,60,25,34
@@ -12,7 +12,7 @@ ID,Name,Price,Cost,Quantity
 11,Ergonomic Chair,350,150,8
 12,Standing Desk,500,200,5
 13,Desk Mat,20,5,150
-14,RGB Light Strip,25,8,80
+14,RGB Light Strip,25,8,70
 15,1TB SSD,100,60,40
 16,2TB HDD,60,30,60
 17,Graphics Card RTX 4090,1600,1200,3
