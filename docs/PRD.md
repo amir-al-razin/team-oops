@@ -389,7 +389,6 @@ This implementation plan provides a structured, task-based approach to building 
   - Call `run()`
   - Handle top-level exceptions
   - Call `shutdown()` on exit or Ctrl+C
-  - **Current status note:** Explicit initialize/run/shutdown and top-level exception handling are in place; dedicated Ctrl+C shutdown hook is still pending.
 
 ### Task 6.3: Integrate All Components
 - [x] Link all classes together in Application

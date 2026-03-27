@@ -31,8 +31,8 @@ None currently open from the initial bug batch.
 ## Phase 6
 - Task 6.1 (Done)
   - Application lifecycle is split into explicit `initialize()`, `run()`, and `shutdown()` methods.
-- Task 6.2 (Partial)
-  - Main entry now calls initialize/run/shutdown with top-level exception handling; dedicated Ctrl+C shutdown handling remains.
+- Task 6.2 (Done)
+  - Main entry calls initialize/run/shutdown, handles top-level exceptions, and includes Ctrl+C shutdown handling.
 
 ## Phase 7
 - Task 7.1 (Not done)
@@ -61,5 +61,4 @@ None currently open from the initial bug batch.
   - Final review checklist not completed.
 
 ## 3) Suggested Implementation Order
-- Priority 1: Complete remaining Phase 6 gap (Ctrl+C graceful shutdown path).
-- Priority 2: Execute formal testing phases (7 to 9).
+- Priority 1: Execute formal testing phases (7 to 9).
