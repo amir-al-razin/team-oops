@@ -83,3 +83,107 @@ This data allows immediate demo/testing without manual bootstrapping.
 - Final verification matrix: `docs/FINAL_VERIFICATION_MATRIX.md`
 - Demo walkthrough: `docs/DEMO_SCRIPT.md`
 - Submission checklist: `docs/SUBMISSION_CHECKLIST.md`
+
+- ### System Architecture
+```mermaid
+classDiagram
+    class Application {
+        -DataManager dm
+        -MenuSystem menu
+        -string dataDir
+        -bool safeToSave
+        +initialize()
+        +run()
+        +shutdown()
+    }
+
+    class DataManager {
+        -vector~Product~ m_products
+        -vector~Customer*~ m_customers
+        -vector~Order~ m_orders
+        -Finance m_finance
+        +loadAll(dataDir)
+        +saveAll(dataDir)
+        +products()
+        +customers()
+        +orders()
+        +finance()
+        -clearCustomers()
+    }
+
+    class MenuSystem {
+        -DataManager dm
+        +mainLoop()
+        +inventoryMenu()
+        +customerMenu()
+        +orderMenu()
+        +financeMenu()
+        +reportsMenu()
+    }
+
+    class Product {
+        -int id
+        -string name
+        -double price
+        -double cost
+        -int quantity
+        +updateStock(qty)
+        +calculateProfit()
+        +isLowStock(threshold)
+    }
+
+    class Customer {
+        <<abstract>>
+        -int id
+        -string name
+        -vector~int~ orderHistory
+        +calculateDiscount()* double
+        +addOrderToHistory(orderId)
+        +upgradeToPremium(customer, loyaltyPercent)
+    }
+
+    class RegularCustomer {
+        +calculateDiscount() double
+    }
+
+    class PremiumCustomer {
+        -double loyaltyPercentage
+        +calculateDiscount() double
+    }
+
+    class Order {
+        -int orderId
+        -Customer* customer
+        -string date
+        -double totalAmount
+        -bool isFinalized
+        -vector~pair~ items
+        +addItem(product, qty)
+        +calculateTotal() double
+        +finalize(finance)
+        +printInvoice()
+    }
+
+    class Finance {
+        -double totalRevenue
+        -double totalExpenses
+        -vector~Transaction~ transactions
+        +recordExpense(amount, desc, date)
+        +recordRevenue(amount, desc, date)
+        +calculateProfit() double
+        +generateReport()
+    }
+
+    Application *-- DataManager : owns
+    Application *-- MenuSystem : owns
+    MenuSystem --> DataManager : uses
+    DataManager *-- Product : manages
+    DataManager *-- Customer : manages
+    DataManager *-- Order : manages
+    DataManager *-- Finance : manages
+    
+    Customer <|-- RegularCustomer : inherits
+    Customer <|-- PremiumCustomer : inherits
+    
+    Order o-- Customer : references
+    Order o-- Product : contains
