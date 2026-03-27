@@ -495,7 +495,62 @@ void MenuSystem::createOrder() {
     }
 
     dm.orders().emplace_back(orderId, customerPtr, date);
+    Order& order = dm.orders().back();
     std::cout << "Order created.\n";
+
+    std::cout << "Add items now? (y/n): ";
+    char addNow;
+    std::cin >> addNow;
+    clearInput();
+
+    while (addNow == 'y' || addNow == 'Y') {
+        listProducts();
+
+        int productId = readInt("Product ID: ");
+        int qty = readInt("Quantity: ");
+
+        Product* productPtr = nullptr;
+        for (auto& p : dm.products()) {
+            if (p.getId() == productId) {
+                productPtr = &p;
+                break;
+            }
+        }
+
+        if (!productPtr) {
+            throw InvalidInputException("Product not found.");
+        }
+
+        order.addItem(productPtr, qty);
+        std::cout << "Item added to cart.\n";
+
+        std::cout << "Add another item? (y/n): ";
+        std::cin >> addNow;
+        clearInput();
+    }
+
+    if (!order.getItems().empty()) {
+        const double subtotal = order.calculateTotal();
+        const double discount = customerPtr ? customerPtr->calculateDiscount() : 0.0;
+        const double finalTotal = subtotal * (1.0 - discount);
+
+        std::cout << std::fixed << std::setprecision(2);
+        std::cout << "\n=== Order Preview ===\n";
+        std::cout << "Subtotal: " << subtotal << "\n";
+        std::cout << "Discount: " << (discount * 100.0) << "%\n";
+        std::cout << "Total: " << finalTotal << "\n";
+
+        std::cout << "Finalize now? (y/n): ";
+        char finalizeNow;
+        std::cin >> finalizeNow;
+        clearInput();
+
+        if (finalizeNow == 'y' || finalizeNow == 'Y') {
+            order.finalize(dm.finance());
+            std::cout << "Order finalized.\n";
+            order.printInvoice();
+        }
+    }
 }
 
 void MenuSystem::listOrders() {
