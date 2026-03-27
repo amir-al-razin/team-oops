@@ -342,14 +342,12 @@ Finance FileManager::loadFinance(const string& filepath) {
         string amountStr = trim(cols[1]);
         string date = trim(cols[2]);
         
-        // Handle descriptions that contain commas (reconstruct split parts)
         string desc = cols[3];
         for (size_t i = 4; i < cols.size(); ++i) {
             desc += "," + cols[i];
         }
         desc = trim(desc);
 
-        // Cleanup: skip old junk lines if they exist
         if (desc.find("Loaded total") != string::npos) continue;
 
         double amount;
