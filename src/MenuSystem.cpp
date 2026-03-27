@@ -308,12 +308,7 @@ void MenuSystem::upgradeCustomerToPremium() {
                 return;
             }
 
-            // Create premium replacement, copy history
-            auto* newC = new PremiumCustomer(c->getId(), c->getName(), loyalty);
-            for (int oid : c->getOrderHistory()) newC->addOrderToHistory(oid);
-
-            delete c;
-            c = newC;
+            c->upgradeToPremium(c, loyalty);
 
             std::cout << "Upgraded to Premium.\n";
             return;
