@@ -431,8 +431,9 @@ void MenuSystem::orderMenu() {
         std::cout << "\n--- Order Menu ---\n"
                   << "1. Create Order\n"
                   << "2. List Orders\n"
-                  << "3. Add Item to Order\n"
-                  << "4. Finalize Order\n"
+                  << "3. View Order Details\n"
+                  << "4. Add Item to Order\n"
+                  << "5. Finalize Order\n"
                   << "0. Back\n";
 
         int choice = readInt("Select: ");
@@ -440,8 +441,9 @@ void MenuSystem::orderMenu() {
         switch (choice) {
             case 1: createOrder(); dm.saveAll("data"); break;
             case 2: listOrders(); break;
-            case 3: addItemToOrder(); dm.saveAll("data"); break;
-            case 4: finalizeOrder(); dm.saveAll("data"); break;
+            case 3: viewOrderDetails(); break;
+            case 4: addItemToOrder(); dm.saveAll("data"); break;
+            case 5: finalizeOrder(); dm.saveAll("data"); break;
             case 0: return;
             default: std::cout << "Invalid choice.\n"; break;
         }
@@ -523,6 +525,20 @@ void MenuSystem::listOrders() {
              << "\n";
     }
 }
+
+void MenuSystem::viewOrderDetails() {
+    int orderId = readInt("Order ID: ");
+
+    for (const auto& o : dm.orders()) {
+        if (o.getOrderId() != orderId) continue;
+
+        o.printInvoice();
+        return;
+    }
+
+    throw InvalidInputException("Order not found.");
+}
+
 void MenuSystem::addItemToOrder() {
     int orderId = readInt("Order ID: ");
     int productId = readInt("Product ID: ");

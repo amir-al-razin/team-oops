@@ -41,6 +41,7 @@ private:
     // Order actions
     void createOrder();
     void listOrders();
+    void viewOrderDetails();
     void addItemToOrder();
     void finalizeOrder();
 
