@@ -53,6 +53,39 @@ std::string MenuSystem::readLine(const char* prompt) {
     return s;
 }
 
+int MenuSystem::getIntInput(const std::string& prompt, int min, int max) {
+    while (true) {
+        int v = readInt(prompt.c_str());
+        if (v < min || v > max) {
+            std::cout << "Input must be between " << min << " and " << max << ".\n";
+            continue;
+        }
+        return v;
+    }
+}
+
+double MenuSystem::getDoubleInput(const std::string& prompt, double min, double max) {
+    while (true) {
+        double v = readDouble(prompt.c_str());
+        if (v < min || v > max) {
+            std::cout << "Input must be between " << min << " and " << max << ".\n";
+            continue;
+        }
+        return v;
+    }
+}
+
+std::string MenuSystem::getStringInput(const std::string& prompt) {
+    while (true) {
+        std::string s = readLine(prompt.c_str());
+        if (s.empty()) {
+            std::cout << "Input cannot be empty.\n";
+            continue;
+        }
+        return s;
+    }
+}
+
 void MenuSystem::mainLoop() {
     while (true) {
         std::cout << "\n===== Business Management System =====\n"
@@ -63,7 +96,7 @@ void MenuSystem::mainLoop() {
                   << "5. System Reports\n"
                   << "0. Exit\n";
 
-        int choice = readInt("Select: ");
+        int choice = getIntInput("Select: ", 0, 5);
 
         try {
             switch (choice) {
@@ -95,7 +128,7 @@ void MenuSystem::inventoryMenu() {
                   << "7. Low Stock Alert\n"
                   << "0. Back\n";
 
-        int choice = readInt("Select: ");
+        int choice = getIntInput("Select: ", 0, 7);
 
         switch (choice) {
             case 1: addProduct(); dm.saveAll("data"); break;
@@ -288,7 +321,7 @@ void MenuSystem::customerMenu() {
                   << "5. Upgrade Regular -> Premium\n"
                   << "0. Back\n";
 
-        int choice = readInt("Select: ");
+        int choice = getIntInput("Select: ", 0, 5);
 
         switch (choice) {
             case 1: addRegularCustomer(); dm.saveAll("data"); break;
@@ -440,7 +473,7 @@ void MenuSystem::orderMenu() {
                   << "5. Finalize Order\n"
                   << "0. Back\n";
 
-        int choice = readInt("Select: ");
+        int choice = getIntInput("Select: ", 0, 5);
 
         switch (choice) {
             case 1: createOrder(); dm.saveAll("data"); break;
@@ -650,7 +683,7 @@ void MenuSystem::financeMenu() {
                   << "4. Transaction History\n"
                   << "0. Back\n";
 
-        int choice = readInt("Select: ");
+        int choice = getIntInput("Select: ", 0, 4);
 
         switch (choice) {
             case 1: showRevenueSummary(); break;
@@ -1062,7 +1095,7 @@ void MenuSystem::reportsMenu() {
                   << "6. Smart Risk Score\n"
                   << "0. Back\n";
 
-        int choice = readInt("Select: ");
+        int choice = getIntInput("Select: ", 0, 6);
 
         switch (choice) {
             case 1: bestSellingProductsReport(); break;
