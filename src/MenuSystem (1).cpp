@@ -8,6 +8,7 @@
 #include <limits>
 #include <stdexcept>
 #include <cctype>
+#include <ctime>
 
 #include "Exceptions.h"
 #include "RegularCustomer.h"
@@ -51,6 +52,20 @@ std::string MenuSystem::readLine(const char* prompt) {
     std::string s;
     std::getline(std::cin, s);
     return s;
+}
+
+std::string MenuSystem::currentDateISO() {
+    std::time_t now = std::time(nullptr);
+    std::tm localTm{};
+#ifdef _WIN32
+    localtime_s(&localTm, &now);
+#else
+    localtime_r(&now, &localTm);
+#endif
+
+    char buffer[11]; // YYYY-MM-DD + null
+    std::strftime(buffer, sizeof(buffer), "%Y-%m-%d", &localTm);
+    return std::string(buffer);
 }
 
 int MenuSystem::getIntInput(const std::string& prompt, int min, int max) {
@@ -190,7 +205,7 @@ void MenuSystem::removeStock(Product& product, int qty, const std::string& reaso
         dm.finance().recordExpense(
             product.getCost() * qty,
             "Stock loss (" + normalized + ") for product #" + std::to_string(product.getId()),
-            "N/A"
+            currentDateISO()
         );
     }
 }

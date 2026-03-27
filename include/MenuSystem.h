@@ -12,6 +12,7 @@ private:
     static int readInt(const char* prompt);
     static double readDouble(const char* prompt);
     static std::string readLine(const char* prompt);
+    static std::string currentDateISO();
     static int getIntInput(const std::string& prompt, int min, int max);
     static double getDoubleInput(const std::string& prompt, double min, double max);
     static std::string getStringInput(const std::string& prompt);
