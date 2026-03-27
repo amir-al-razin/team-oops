@@ -113,8 +113,7 @@ void MenuSystem::addProduct() {
 
     dm.products().emplace_back(id, name, price, cost, qty);
 
-    // Step 3 (optional): initial stock purchase expense
-    // dm.finance().recordExpense(cost * qty, "Initial stock for " + name, "N/A");
+    dm.finance().recordExpense(cost * qty, "Initial stock for " + name, "N/A");
 
     std::cout << "Product added.\n";
 }
