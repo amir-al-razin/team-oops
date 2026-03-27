@@ -358,14 +358,13 @@ This implementation plan provides a structured, task-based approach to building 
   - **Current status note:** Implemented and null-customer crash is fixed.
 
 ### Task 5.7: Implement Input Validation & Error Handling
-- [ ] Create utility functions:
+- [x] Create utility functions:
   - `int getIntInput(string prompt, int min, int max)`
   - `double getDoubleInput(string prompt, double min, double max)`
   - `string getStringInput(string prompt)`
 - [x] Wrap all inputs in try-catch blocks
 - [x] Clear input buffer on invalid input
 - [x] Display user-friendly error messages
-  - **Current status note:** Equivalent helpers exist (`readInt`, `readDouble`, `readLine`) with different signatures.
 
 ---
 
@@ -382,7 +381,6 @@ This implementation plan provides a structured, task-based approach to building 
   - `initialize()`: Load all data from files
   - `run()`: Main loop calling menu system
   - `shutdown()`: Save all data, cleanup
-  - **Current status note:** Files and `run()` flow exist, but explicit `initialize()` / `shutdown()` methods are not split out yet.
 
 ### Task 6.2: Implement Main Entry Point
 - [x] Create `src/main.cpp`
@@ -391,7 +389,7 @@ This implementation plan provides a structured, task-based approach to building 
   - Call `run()`
   - Handle top-level exceptions
   - Call `shutdown()` on exit or Ctrl+C
-  - **Current status note:** Entry point exists and runs application, but dedicated initialize/shutdown/exception wrapper behavior is only partially aligned.
+  - **Current status note:** Explicit initialize/run/shutdown and top-level exception handling are in place; dedicated Ctrl+C shutdown hook is still pending.
 
 ### Task 6.3: Integrate All Components
 - [x] Link all classes together in Application

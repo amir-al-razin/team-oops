@@ -25,14 +25,14 @@ None currently open from the initial bug batch.
 ## 2) Pending or Partial PRD Tasks
 
 ## Phase 5
-- Task 5.7 (Partial)
-  - Input helpers exist with different names/signatures from PRD utility spec.
+- Task 5.7 (Done)
+  - PRD-style input utility APIs are implemented and wired into menu selection paths.
 
 ## Phase 6
-- Task 6.1 (Partial)
-  - Application class exists, but explicit initialize/run/shutdown separation is not complete.
+- Task 6.1 (Done)
+  - Application lifecycle is split into explicit `initialize()`, `run()`, and `shutdown()` methods.
 - Task 6.2 (Partial)
-  - main.cpp exists; top-level exception policy and shutdown orchestration are not fully aligned with PRD.
+  - Main entry now calls initialize/run/shutdown with top-level exception handling; dedicated Ctrl+C shutdown handling remains.
 
 ## Phase 7
 - Task 7.1 (Not done)
@@ -61,6 +61,5 @@ None currently open from the initial bug batch.
   - Final review checklist not completed.
 
 ## 3) Suggested Implementation Order
-- Priority 1: Finish remaining Phase 5 gap (5.7 input utility API alignment).
-- Priority 2: Finish Phase 6 lifecycle alignment.
-- Priority 3: Execute formal testing phases (7 to 9).
+- Priority 1: Complete remaining Phase 6 gap (Ctrl+C graceful shutdown path).
+- Priority 2: Execute formal testing phases (7 to 9).
