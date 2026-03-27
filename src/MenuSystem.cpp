@@ -89,8 +89,9 @@ void MenuSystem::inventoryMenu() {
                   << "1. Add Product\n"
                   << "2. Restock Product\n"
                   << "3. Remove Stock (Loss)\n"
-                  << "4. List Products\n"
-                  << "5. Low Stock Alert\n"
+                  << "4. Update Product\n"
+                  << "5. List Products\n"
+                  << "6. Low Stock Alert\n"
                   << "0. Back\n";
 
         int choice = readInt("Select: ");
@@ -99,8 +100,9 @@ void MenuSystem::inventoryMenu() {
             case 1: addProduct(); dm.saveAll("data"); break;
             case 2: restockProduct(); dm.saveAll("data"); break;
             case 3: removeStockAsLoss(); dm.saveAll("data"); break;
-            case 4: listProducts(); break;
-            case 5: lowStockAlert(); break;
+            case 4: updateProduct(); dm.saveAll("data"); break;
+            case 5: listProducts(); break;
+            case 6: lowStockAlert(); break;
             case 0: return;
             default: std::cout << "Invalid choice.\n"; break;
         }
@@ -165,6 +167,29 @@ void MenuSystem::removeStockAsLoss() {
         }
 
         std::cout << "Stock removed.\n";
+        return;
+    }
+
+    throw InvalidInputException("Product ID not found.");
+}
+
+void MenuSystem::updateProduct() {
+    int id = readInt("Product ID to update: ");
+
+    for (auto& p : dm.products()) {
+        if (p.getId() != id) continue;
+
+        std::string name = readLine("New name: ");
+        double price = readDouble("New selling price: ");
+        double cost = readDouble("New cost price: ");
+        int qty = readInt("New quantity: ");
+
+        p.setName(name);
+        p.setPrice(price);
+        p.setCost(cost);
+        p.setQuantity(qty);
+
+        std::cout << "Product updated.\n";
         return;
     }
 
